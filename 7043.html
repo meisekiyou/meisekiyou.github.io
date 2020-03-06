@@ -181,7 +181,7 @@
 <li>本地：macOS Mojave 10.14.6</li>
 <li>服务器：CentOS 7 1908</li>
 </ul>
-<h2 id="本地环境搭建"><a href="#本地环境搭建" class="headerlink" title="本地环境搭建"></a>本地环境搭建</h2><p>Hexo 依赖于 GitHub 和 Node.js。由于我使用的是 macOS 并安装了 Xcode 所以自带 GitHubt 。至于 Node.js 我推荐使用 nvm 进行管理和安装。</p>
+<h2 id="本地环境搭建"><a href="#本地环境搭建" class="headerlink" title="本地环境搭建"></a>本地环境搭建</h2><p>Hexo 依赖于 GitHub 和 Node.js。由于我装了 Xcode 所以自带 GitHub 。至于 Node.js 我推荐使用 nvm 进行管理和安装。</p>
 <h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><pre><code class="bash">$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</code></pre>
 <p>运行后根据提示向 ~/.bash_profile 写入环境变量。</p>
 <pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
@@ -231,16 +231,16 @@ $ chmod 600 .ssh/authorized_keys
 $ vi /etc/passwd</code></pre>
 <p>将最后一行的</p>
 <pre><code>git:x:1000:1000::/home/git:/bin/bash</code></pre><p>改为</p>
-<pre><code>git:x:1000:1000::/home/git:/usr/bin/git-shell</code></pre><h4 id="创建裸仓库"><a href="#创建裸仓库" class="headerlink" title="创建裸仓库"></a>创建裸仓库</h4><pre><code class="bash">$ cd /home/git
+<pre><code>git:x:1000:1000::/home/git:/usr/bin/git-shell</code></pre><h4 id="创建裸仓库并配置-Git-Hooks"><a href="#创建裸仓库并配置-Git-Hooks" class="headerlink" title="创建裸仓库并配置 Git Hooks"></a>创建裸仓库并配置 Git Hooks</h4><pre><code class="bash">$ cd /home/git
 $ mkdir blog.git
 $ cd blog.git
-$ git init iibare</code></pre>
-<h4 id="配置-Git-Hooks"><a href="#配置-Git-Hooks" class="headerlink" title="配置 Git Hooks"></a>配置 Git Hooks</h4><pre><code class="bash">$ vi hooks/post-receive</code></pre>
+$ git init --bare
+$ vi hooks/post-receive</code></pre>
 <p>写入如下内容</p>
 <pre><code>#!/bin/sh
-git --work-tree=/blog --git-dir=/home/git/blog.git checkout -f</code></pre><p>–work-tree 的目录为 nginx 网站根目录，可以自由设定。最后给脚本加上执行权限</p>
+git --work-tree=/blog --git-dir=/home/git/blog.git checkout -f</code></pre><p>–work-tree 的目录为 Nginx 网站根目录，可以自由设定。最后给脚本加上执行权限</p>
 <pre><code class="bash">$ chmod +x hooks/post-receive</code></pre>
-<h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><p>这里我采用编译安装，想省事的话也可以使用 yum 进行安装。</p>
+<h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><p>这里我采用编译安装，想省事的话也可以使用 <code>yum install nginx</code> 进行安装。</p>
 <h4 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h4><pre><code class="bash"># 切换至 root 用户
 $ su root
 $ cd /usr/local/src/
