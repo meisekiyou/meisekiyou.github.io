@@ -155,21 +155,20 @@
         
         <div class="index-excerpt" >
           <div class="index-text mb-1">前言在折腾的过后往往都需要进行总结记录，这次蹭着闲暇之余利用 Hexo 复活我多年前的博客。
-##基本设想
-
+基本设想
 本地 Hexo 生成静态文件，使用 GitHub 同步至服务器仓库
-服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 nginx 网站根目录
-通过 nginx 转发，实现博客访问
+服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 Nginx 网站根目录
+通过 Nginx 转发，实现博客访问
 
-环境约定本地
-macOS Mojave 10.14.6服务器
-CentOS 7
+环境约定
+本地：macOS Mojave 10.14.6
+服务器：CentOS 7 1908
 
 本地环境搭建Hexo 依赖于 GitHub 和 Node.js。由于我使用的是 macOS 并安装了 Xcode 所以自带 GitHubt 。至于 Node.js 我推荐使用 nvm 进行安装。
 安装Node.js$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 运行后根据提示向 ~/.bash_profile 写入环境变量。
 export NVM_DIR=&quot;$HOME/.nvm&quot;
-[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &am</div>
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ]</div>
         </div>
       </a>
 

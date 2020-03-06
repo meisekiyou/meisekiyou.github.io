@@ -172,21 +172,20 @@
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在折腾的过后往往都需要进行总结记录，这次蹭着闲暇之余利用 Hexo 复活我多年前的博客。</p>
-<p>##基本设想</p>
-<ul>
+<h2 id="基本设想"><a href="#基本设想" class="headerlink" title="基本设想"></a>基本设想</h2><ul>
 <li>本地 Hexo 生成静态文件，使用 GitHub 同步至服务器仓库</li>
-<li>服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 nginx 网站根目录</li>
-<li>通过 nginx 转发，实现博客访问</li>
+<li>服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 Nginx 网站根目录</li>
+<li>通过 Nginx 转发，实现博客访问</li>
 </ul>
-<h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><h3 id="本地"><a href="#本地" class="headerlink" title="本地"></a>本地</h3><ul>
-<li>macOS Mojave 10.14.6<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3></li>
-<li>CentOS 7</li>
+<h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul>
+<li>本地：macOS Mojave 10.14.6</li>
+<li>服务器：CentOS 7 1908</li>
 </ul>
 <h2 id="本地环境搭建"><a href="#本地环境搭建" class="headerlink" title="本地环境搭建"></a>本地环境搭建</h2><p>Hexo 依赖于 GitHub 和 Node.js。由于我使用的是 macOS 并安装了 Xcode 所以自带 GitHubt 。至于 Node.js 我推荐使用 nvm 进行安装。</p>
 <h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><pre><code class="bash">$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</code></pre>
 <p>运行后根据提示向 ~/.bash_profile 写入环境变量。</p>
 <pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
-[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;</code></pre><p>接着使其生效。</p>
+[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;</code></pre><p>使其生效。</p>
 <pre><code class="bash">$ source ~/.bash_profile</code></pre>
 <p>通过命令查看可用版本。</p>
 <pre><code class="bash">$ nvm ls-remote
@@ -246,7 +245,8 @@ git --work-tree=/blog --git-dir=/home/git/blog.git checkout -f</code></pre><p>�
 $ su root
 $ cd /usr/local/src/
 $ wget https://nginx.org/download/nginx-1.16.1.tar.gz https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.gz https://www.openssl.org/source/openssl-1.1.1d.tar.gz https://www.zlib.net/zlib-1.2.11.tar.gz</code></pre>
-<h4 id="安装-openssl"><a href="#安装-openssl" class="headerlink" title="安装 openssl"></a>安装 openssl</h4><pre><code class="bash">$ yum install gcc-c++ -y
+<h4 id="安装-openssl"><a href="#安装-openssl" class="headerlink" title="安装 openssl"></a>安装 openssl</h4><pre><code class="bash"># 安装 gcc
+$ yum install gcc-c++ -y
 $ tar xf openssl-1.1.1d.tar.gz
 $ cd openssl-1.1.1d
 $ ./config
