@@ -130,7 +130,7 @@
                   
                   &nbsp;<i class="far fa-chart-bar"></i>
                   <span class="post-count">
-                    269 字
+                    273 字
                   </span>&nbsp;
                 
 
@@ -189,7 +189,7 @@ open waifu2x-converter-glsl.xcodeproj</code></pre>
 <h2 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h2><pre><code class="bash">xcodebuild -project waifu2x-converter-glsl.xcodeproj -target waifu2x-converter-glsl
 cp build/Release/waifu2x-converter-glsl ..
 chmod +x ../waifu2x-converter-glsl</code></pre>
-<h2 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><p>xcode-select: error: tool ‘xcodebuild’ requires Xcode, but active developer directory ‘/Library/Developer/CommandLineTools’ is a command line tools instance</p>
+<h2 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><p><code>xcode-select: error: tool &#39;xcodebuild&#39; requires Xcode, but active developer directory &#39;/Library/Developer/CommandLineTools&#39; is a command line tools instance</code></p>
 <pre><code class="bash">sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code></pre>
 <p>指定Command Line Tools路径</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个编译还是很顺利的，后续可以在 ~/.bash_profile 添加环境变量在任意目录运行，这里就不演示了。</p>
