@@ -16,7 +16,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>epman&#39;s blog</title>
+  <title>分类 - macOS CentOS ~ epman&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -39,7 +39,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -120,10 +120,6 @@
           </div>
 
           
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
-          
         </div>
       </div>
     </div>
@@ -139,146 +135,20 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-
-  <div class="row mx-auto index-card">
+<div class="list-group">
+<!--  <p class="h4">共计 1 篇文章</p>-->
+  <hr>
+  
     
+      
+      <p class="h5">2020</p>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/7043.html">
-        <p class="h4 index-header">使用Hexo搭建博客</p>
-      </a>
-
-      <a href="/7043.html">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">前言在折腾的过后往往都需要进行总结记录，这次蹭着闲暇之余利用 Hexo 复活我多年前的博客。
-基本设想
-本地 Hexo 生成静态文件，使用 GitHub 同步至服务器仓库
-服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 Nginx 网站根目录
-通过 Nginx 转发，实现博客访问
-
-环境约定
-本地：macOS Mojave 10.14.6
-服务器：CentOS 7 1908
-
-本地环境搭建Hexo 依赖于 GitHub 和 Node.js。由于我使用的是 macOS 并安装了 Xcode 所以自带 GitHubt 。至于 Node.js 我推荐使用 nvm 进行管理和安装。
-安装Node.js$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-运行后根据提示向 ~/.bash_profile 写入环境变量。
-export NVM_DIR=&quot;$HOME/.nvm&quot;
-[ -s &quot;$NVM_DIR/nvm.sh&quot</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-06&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/macOS%20CentOS">macOS CentOS</a>&nbsp;
-          &nbsp;
-        
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/9190.html">
-        <p class="h4 index-header">Terminal Proxyの設定メモ</p>
-      </a>
-
-      <a href="/9190.html">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">前言今回は自宅で学校のサーバーを利用するための設定を調べてメモに書きました。初めて日本語でメモを書くので、もし何か間違っていましたら訂正してください！
-環境確認
-macOS Mojave 10.14.6
-
-vi ~/.bash_profile
-~/.bash_profileに書く
-alias proxy=&#39;export all_proxy=socks5://127.0.0.1:1080&#39;
-alias unproxy=&#39;unset all_proxy&#39;
-使う方法proxy　#ON
-unproxy #OFF
-curlで自分のIPを確認するcurl inet-ip.info
+    <a href="/7043.html" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">使用Hexo搭建博客</span>
+      <span style="float: right;">03-06</span>
+    </a>
+  
 </div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-03&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/macOS">macOS</a>&nbsp;
-          &nbsp;
-        
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/14602.html">
-        <p class="h4 index-header">macOS Mojave 安装 waifu2x-converter-glsl</p>
-      </a>
-
-      <a href="/14602.html">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">前言对于模糊的动漫风格图片我们可以使用 waifu2x 进行放大，可惜的是新版 macOS 放弃了对 NVIDIA 显卡的支持。对于非 NVIDIA 显卡我们可以使用 waifu2x-converter-glsl 分支利用 OpenGL 替代 NVIDIA CUDA 实现。
-环境约定
-macOS Mojave 10.14.6
-Xcode 11.3.1
-Homebrew 2.2.6
-Intel UHD Graphics 630
-
-编译前准备waifu2x-converter-glsl 依赖于 OpenCV 和 GLFW，这里我们使用 Homebrew 安装
-brew install opencv glfw
-brew install 安装的应用默认目录为 /usr/local/Cellar/
-下载源码git clone https://github.com/ueshita/waifu2x-converter-glsl
-cd waifu2x-converter-glsl/build
-open waifu2x-converter-glsl.xcodeproj
-替换库文件
-添加Header Se</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-21&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/macOS">macOS</a>&nbsp;
-          &nbsp;
-        
-        
-      </div>
-    </div>
-  </div>
-
-
 
 
 
@@ -405,7 +275,7 @@ open waifu2x-converter-glsl.xcodeproj
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "问是一时之耻，不问是一世之耻&nbsp;",
+        "分类 - macOS CentOS&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
