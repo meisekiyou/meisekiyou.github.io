@@ -18,21 +18,24 @@
   <meta name="keywords" content="">
   <title>我们即一体</title>
 
-  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
-<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
-<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css"  >
-<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css"  >
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css" />
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css"  >
+  <link  rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css" />
 
-<link rel="stylesheet" href="/css/main.css"  >
+<link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css"  >
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+<!-- 自定义样式保持在最底部 -->
 
 
 <meta name="generator" content="Hexo 4.2.0"></head>
@@ -107,7 +110,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -132,7 +135,8 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
@@ -143,7 +147,7 @@
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-8 mx-auto index-info">
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a href="/7043.html">
         <p class="h4 index-header">使用Nginx和Hexo搭建博客</p>
       </a>
@@ -165,10 +169,7 @@
 服务器：CentOS 7 1908
 
 本地环境搭建Hexo 依赖于 Git 和 Node.js 。由于我装了 Xcode 所以自带 Git 。至于 Node.js 我推荐使用 nvm 进行管理和安装。
-安装Node.js$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-运行后根据提示向 ~/.bash_profile 写入环境变量。
-export NVM_DIR=&quot;$HOME/.nvm&quot;
-[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quo</div>
+安装Node.js$ curl</div>
         </div>
       </a>
 
@@ -179,9 +180,9 @@ export NVM_DIR=&quot;$HOME/.nvm&quot;
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/macOS">macOS</a>&nbsp;
+            <a href="/categories/macOS/">macOS</a>&nbsp;
           
-            <a href="/categories/CentOS">CentOS</a>&nbsp;
+            <a href="/categories/CentOS/">CentOS</a>&nbsp;
           &nbsp;
         
         
@@ -192,7 +193,7 @@ export NVM_DIR=&quot;$HOME/.nvm&quot;
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-8 mx-auto index-info">
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a href="/9190.html">
         <p class="h4 index-header">Terminal Proxyの設定メモ</p>
       </a>
@@ -213,8 +214,7 @@ alias proxy=&#39;export all_proxy=socks5://127.0.0.1:1080&#39;
 alias unproxy=&#39;unset all_proxy&#39;
 使う方法proxy　#ON
 unproxy #OFF
-curlで自分のIPを確認するcurl inet-ip.info
-</div>
+curlで自分のIPを確認するcurl inet-ip.i</div>
         </div>
       </a>
 
@@ -225,7 +225,7 @@ curlで自分のIPを確認するcurl inet-ip.info
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/macOS">macOS</a>&nbsp;
+            <a href="/categories/macOS/">macOS</a>&nbsp;
           &nbsp;
         
         
@@ -236,7 +236,7 @@ curlで自分のIPを確認するcurl inet-ip.info
   <div class="row mx-auto index-card">
     
     
-    <div class="col-12 col-md-8 mx-auto index-info">
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a href="/14602.html">
         <p class="h4 index-header">macOS Mojave 安装 waifu2x-converter-glsl</p>
       </a>
@@ -255,13 +255,7 @@ Homebrew 2.2.6
 Intel UHD Graphics 630
 
 编译前准备waifu2x-converter-glsl 依赖于 OpenCV 和 GLFW，这里我们使用 Homebrew 安装
-brew install opencv glfw
-brew install 安装的应用默认目录为 /usr/local/Cellar/
-下载源码git clone https://github.com/ueshita/waifu2x-converter-glsl
-cd waifu2x-converter-glsl/build
-open waifu2x-converter-glsl.xcodeproj
-替换库文件
-添加Header Se</div>
+brew install opencv</div>
         </div>
       </a>
 
@@ -272,7 +266,7 @@ open waifu2x-converter-glsl.xcodeproj
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/macOS">macOS</a>&nbsp;
+            <a href="/categories/macOS/">macOS</a>&nbsp;
           &nbsp;
         
         
@@ -322,6 +316,10 @@ open waifu2x-converter-glsl.xcodeproj
 </div>
   
 
+  
+
+  
+
   <footer class="mt-5">
   <div class="text-center py-3">
     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>Hexo</b></a>
@@ -330,19 +328,22 @@ open waifu2x-converter-glsl.xcodeproj
     <br>
 
     
-  
-    <!-- 不蒜子统计PV -->
+  <div>
     
-    &nbsp;<span id="busuanzi_container_site_pv"></span>总访问量 
-          <span id="busuanzi_value_site_pv"></span> 次&nbsp;
-  
-  
-    <!-- 不蒜子统计UV -->
+      <!-- 不蒜子统计PV -->
+      
+      <span id="busuanzi_container_site_pv" style="display: none">
+      总访问量 <span id="busuanzi_value_site_pv"></span> 次
+    </span>
     
-    &nbsp;<span id="busuanzi_container_site_uv"></span>总访客数 
-            <span id="busuanzi_value_site_uv"></span> 人&nbsp;
-  
-  <br>
+    
+      <!-- 不蒜子统计UV -->
+      
+      <span id="busuanzi_container_site_uv" style="display: none">
+      总访客数 <span id="busuanzi_value_site_uv"></span> 人
+    </span>
+    
+  </div>
 
 
 
@@ -356,24 +357,26 @@ open waifu2x-converter-glsl.xcodeproj
 </footer>
 
 <!-- SCRIPTS -->
-<script src="/lib/jquery/jquery.min.js" ></script>
-<script src="/lib/popper/popper.min.js" ></script>
-<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
-<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
-<script src="/js/main.js" ></script>
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js" ></script>
-
-
-
-
-
-  <script src="/lib/smoothscroll/SmoothScroll.min.js" ></script>
+  <script  src="/js/lazyload.js" ></script>
 
 
 
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script  src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+
+
+
+  <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
 
 
 <!-- Plugins -->
@@ -392,7 +395,7 @@ open waifu2x-converter-glsl.xcodeproj
 
 
 
-  <script src="/lib/prettify/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  linenums');
@@ -402,7 +405,7 @@ open waifu2x-converter-glsl.xcodeproj
 
 
 
-  <script src="/lib/typed/typed.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -422,7 +425,7 @@ open waifu2x-converter-glsl.xcodeproj
 
 
 
-  <script src="/lib/anchor/anchor.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
@@ -439,7 +442,7 @@ open waifu2x-converter-glsl.xcodeproj
 
 
 
-  <script src="/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -451,7 +454,7 @@ open waifu2x-converter-glsl.xcodeproj
 
 
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {
