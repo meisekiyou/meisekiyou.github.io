@@ -4,6 +4,41 @@
   
   
   <entry>
+    <title>CentOS 安装 vlmcsd 搭建 KMS 服务器</title>
+    <link href="/60801.html"/>
+    <url>/60801.html</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>KMS(Key Management Service) 是微软公司的一种产品激活机制</p><ul><li>本文章仅供学习讨论，请在24小时内删除并忘记</li><li>KMS 激活有效期仅 180天</li><li>请使用正版产品</li></ul><h2 id="安装-vlmcsd"><a href="#安装-vlmcsd" class="headerlink" title="安装 vlmcsd"></a>安装 <a href="https://github.com/Wind4/vlmcsd/" target="_blank" rel="noopener">vlmcsd</a></h2><p>首先在<a href="https://github.com/Wind4/vlmcsd/releases" target="_blank" rel="noopener">这里</a>下载最新的版本</p><pre><code class="bash">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gztar xf binaries.tar.gz -C /usr/local/binaries/Linux/intel/static/# 创建相应架构二进制执行文件的软连接ln -s /usr/local/binaries/Linux/intel/static/vlmcsd-x64-musl-static /usr/sbin/vlmcsd# 运行并查看进程vlmcsdnetstat -apn | grep vlmcsd# 开放 vlmcsd 端口firewall-cmd --zone=public --add-port=1688/tcp --permanent</code></pre><h2 id="激活-Windows"><a href="#激活-Windows" class="headerlink" title="激活 Windows"></a>激活 Windows</h2><p>VL 版本的镜像一般内置 GVLK key，非 VL 版本的 Windows 也可以手动输入 GVLK key 来使用 KMS。GVLK key可以在<a href="https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys" target="_blank" rel="noopener">这里</a>获取。</p><p>以 <strong>管理员</strong> 模式运行 cmd</p><pre><code class="bash"># 设置 GVLK keyslmgr /ipk &#39;GVLK key&#39;# 设置 KMS 服务器地址slmgr /skms &#39;KMS服务器IP地址&#39;# 激活slmgr /ato</code></pre><p>成功后会弹窗提示。</p><h2 id="激活-Office"><a href="#激活-Office" class="headerlink" title="激活 Office"></a>激活 Office</h2><p>安装 Office 后我们不要立刻打开，老规矩以 <strong>管理员</strong> 模式运行 cmd。</p><p>找到你的 Office 安装目录，如：<code>C:\Program Files (x86)\Microsoft Office\Office16</code>。</p><pre><code class="bash"># 设置 KMS 服务器地址cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /sethst:&#39;KMS服务器IP地址&#39;# 激活cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /act</code></pre><p>看到 successful 字样表示激活成功。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows</category>
+      
+      <category>CentOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>CentOS</tag>
+      
+      <tag>系统</tag>
+      
+      <tag>激活</tag>
+      
+      <tag>闲置</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>macOS 下格式化磁盘为 ext2/3/4 文件系统</title>
     <link href="/11711.html"/>
     <url>/11711.html</url>
