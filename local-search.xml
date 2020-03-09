@@ -49,6 +49,12 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>macOS</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -80,6 +86,8 @@
       
       <tag>Hexo</tag>
       
+      <tag>nvm</tag>
+      
     </tags>
     
   </entry>
@@ -101,6 +109,14 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>macOS</tag>
+      
+      <tag>Terminal</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -119,6 +135,14 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>macOS</tag>
+      
+      <tag>软件</tag>
+      
+    </tags>
     
   </entry>
   
