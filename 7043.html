@@ -253,7 +253,7 @@ $ git init --bare
 $ vi hooks/post-receive</code></pre>
 <p>写入如下内容</p>
 <pre><code>#!/bin/sh
-git --work-tree=/blog --git-dir=/home/git/blog.git checkout -f</code></pre><p>–work-tree 的目录为 Nginx 网站根目录，可以自由设定。最后给脚本加上执行权限</p>
+git --work-tree=/blog --git-dir=/home/git/blog.git checkout -f</code></pre><p>–work-tree 的目录为 Nginx 网站根目录，最后给脚本加上执行权限</p>
 <pre><code class="bash">$ chmod +x hooks/post-receive</code></pre>
 <h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><p>这里我采用编译安装，想省事的话也可以使用 <code>yum install nginx</code> 进行安装。</p>
 <h4 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h4><pre><code class="bash"># 切换至 root 用户
