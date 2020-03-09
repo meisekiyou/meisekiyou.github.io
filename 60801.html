@@ -140,7 +140,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    343 字
+                    383 字
                   </span>
                 
 
@@ -201,7 +201,7 @@ vlmcsd
 netstat -apn | grep vlmcsd
 # 开放 vlmcsd 端口
 firewall-cmd --zone=public --add-port=1688/tcp --permanent</code></pre>
-<h2 id="激活-Windows"><a href="#激活-Windows" class="headerlink" title="激活 Windows"></a>激活 Windows</h2><p>VL 版本的镜像一般内置 GVLK key，非 VL 版本的 Windows 也可以手动输入 GVLK key 来使用 KMS。GVLK key可以在<a href="https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys" target="_blank" rel="noopener">这里</a>获取。</p>
+<h2 id="激活-Windows"><a href="#激活-Windows" class="headerlink" title="激活 Windows"></a>激活 Windows</h2><p>首先你要确保系统为批量激活版本，即VL版本。其镜像一般内置 GVLK key，非 VL 版本的 Windows 也可以手动输入 GVLK key 来使用 KMS。Windows 的GVLK key 可以在<a href="https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys" target="_blank" rel="noopener">这里</a>获取。Office 2019/2016 的 GVLK key 在<a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>，2013 和 2010 则分别在<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/dn385360(v=office.15)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>和<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/office-2010/ee624355(v=office.14)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>。</p>
 <p>以 <strong>管理员</strong> 模式运行 cmd</p>
 <pre><code class="bash"># 设置 GVLK key
 slmgr /ipk &#39;GVLK key&#39;
@@ -238,9 +238,9 @@ cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /a
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
-                    
                       <a class="hover-with-bg" href="/tags/Windows/">Windows</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
                     
                       <a class="hover-with-bg" href="/tags/Office/">Office</a>
                     
