@@ -156,10 +156,16 @@
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">前言e2fsprogs 是维护 ext2/3/4 文件系统的工具，但在 macOS 上并未预装。...</div>
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">前言e2fsprogs 是维护 ext2/3/4 文件系统的工具，但在 macOS 上并未预装。
+安装 e2fsprogsbrew install e2fsprogs
+使用方法首先获取磁盘和分区信息，在 Terminal 中执行
+diskdiskutil list
+随后卸载磁盘格式化为 ext4 分区，这里用 /dev/disk2 进行演示
+diskutil unmountdisk /dev/disk2
+sudo $(brew --prefix e2fsprogs)/sbin/mkfs.ext4 /dev/disk2
+</div>
         </div>
       </a>
 
