@@ -201,7 +201,7 @@
 <pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;
 [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;</code></pre><p>使其生效。</p>
 <pre><code class="bash">$ source ~/.bash_profile</code></pre>
-<p>通过命令查看可用版本。</p>
+<p>通过命令查看可用版本。也直接使用 <code>nvm install --lts</code> 安装最新的 LTS 版本.</p>
 <pre><code class="bash">$ nvm ls-remote --lts
        v12.13.0   (LTS: Erbium)
        v12.13.1   (LTS: Erbium)
@@ -216,7 +216,6 @@ $ node -v
 v12.16.1
 $ npm -v
 6.13.4</code></pre>
-<p>也直接使用 <code>nvm install --lts</code> 安装最新的 LTS 版本</p>
 <h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>Git 和 Node.js都安装完成后就可以使用 npm 安装 Hexo 了。</p>
 <pre><code class="bash">$ npm install -g hexo-cli</code></pre>
 <p>接着创建博客的目录并初始化.</p>
