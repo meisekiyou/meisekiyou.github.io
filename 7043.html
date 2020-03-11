@@ -282,7 +282,7 @@ $ tar xf nginx-1.16.1.tar.gz
 $ cd nginx-1.16.1
 # 创建 nginx 运行用户
 $ groupadd nginx
-$ useradd -s /sbin/nologin -g nginx nginx
+$ useradd -s /sbin/nologin -g nginx nginx -M
 # 配置编译参数
 $ ./configure \
 --group=nginx \
