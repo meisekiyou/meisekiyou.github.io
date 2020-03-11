@@ -13,18 +13,18 @@
     
     <categories>
       
-      <category>Windows</category>
-      
       <category>CentOS</category>
+      
+      <category>Windows</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>Windows</tag>
-      
       <tag>CentOS</tag>
+      
+      <tag>Windows</tag>
       
       <tag>Office</tag>
       
@@ -80,9 +80,9 @@
     
     <tags>
       
-      <tag>CentOS</tag>
-      
       <tag>macOS</tag>
+      
+      <tag>CentOS</tag>
       
       <tag>Nginx</tag>
       
