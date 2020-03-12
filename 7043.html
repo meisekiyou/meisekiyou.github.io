@@ -286,9 +286,9 @@ $ ./configure \
 --with-http_gzip_static_module \
 --with-pcre=../pcre-8.44 \
 --with-openssl=../openssl-1.1.1d \
---with-zlib=../zlib-1.2.11</code></pre>
-<p>输出的 Makefile 信息</p>
-<pre><code>Configuration summary
+--with-zlib=../zlib-1.2.11
+# 输出的 Makefile 信息
+Configuration summary
   + using PCRE library: ../pcre-8.44
   + using OpenSSL library: ../openssl-1.1.1d
   + using zlib library: ../zlib-1.2.11
@@ -305,8 +305,9 @@ $ ./configure \
   nginx http proxy temporary files: &quot;proxy_temp&quot;
   nginx http fastcgi temporary files: &quot;fastcgi_temp&quot;
   nginx http uwsgi temporary files: &quot;uwsgi_temp&quot;
-  nginx http scgi temporary files: &quot;scgi_temp&quot;</code></pre><p>老规矩编译并安装</p>
-<pre><code class="bash">$ make -j2 &amp;&amp; make install
+  nginx http scgi temporary files: &quot;scgi_temp&quot;
+# 老规矩编译并安装
+$ make -j2 &amp;&amp; make install
 # 任意目录运行 Nginx
 $ ln -s /usr/local/nginx/sbin/nginx /usr/sbin/
 # 配置systemd脚本
