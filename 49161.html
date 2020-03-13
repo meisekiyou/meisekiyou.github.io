@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>CentOS 安装 vlmcsd 搭建 KMS 服务器 ~ 我们即一体</title>
+  <title>敬語の勉強メモ ~ 我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -132,7 +132,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期一, 三月 9日 2020, 9:36 晚上
+                  星期五, 三月 13日 2020, 2:22 下午
                 </p>
               
 
@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    399 字
+                    423 字
                   </span>
                 
 
@@ -184,40 +184,212 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>KMS(Key Management Service) 是微软公司的一种产品激活机制。</p>
-<ul>
-<li>本文章仅供学习讨论，相关的软件请在 24 小时内删除</li>
-<li>KMS 激活有效期仅 <strong>180</strong> 天（可续期</li>
-<li>请使用正版产品</li>
-</ul>
-<a id="more"></a>
-
-<h2 id="安装-vlmcsd"><a href="#安装-vlmcsd" class="headerlink" title="安装 vlmcsd"></a>安装 <a href="https://github.com/Wind4/vlmcsd/" target="_blank" rel="noopener">vlmcsd</a></h2><p>首先在<a href="https://github.com/Wind4/vlmcsd/releases" target="_blank" rel="noopener">这里</a>下载最新的版本</p>
-<pre><code class="bash">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gz
-tar xf binaries.tar.gz -C /usr/local/binaries/Linux/intel/static/
-# 创建相应架构二进制执行文件的软连接
-ln -s /usr/local/binaries/Linux/intel/static/vlmcsd-x64-musl-static /usr/sbin/vlmcsd
-# 运行并查看进程
-vlmcsd
-netstat -apn | grep vlmcsd
-# 开放 vlmcsd 端口
-firewall-cmd --zone=public --add-port=1688/tcp --permanent</code></pre>
-<h2 id="激活-Windows"><a href="#激活-Windows" class="headerlink" title="激活 Windows"></a>激活 Windows</h2><p>首先你要确保系统为 <strong>批量激活版本</strong>，即 VL 版本。其镜像一般内置 GVLK key，非 VL 版本的 Windows 也可以手动输入 GVLK key 来使用 KMS。Windows 的GVLK key 可以在<a href="https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys" target="_blank" rel="noopener">这里</a>获取。Office 2019 和 2016 的 GVLK key 在<a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>，2013 和 2010 则分别在<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/dn385360(v=office.15)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>和<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/office-2010/ee624355(v=office.14)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>。</p>
-<p>以 <strong>管理员</strong> 模式运行 cmd</p>
-<pre><code class="bash"># 设置 GVLK key
-slmgr /ipk &#39;GVLK key&#39;
-# 设置 KMS 服务器地址
-slmgr /skms &#39;KMS服务器IP地址&#39;
-# 激活
-slmgr /ato</code></pre>
-<p>成功后会弹窗提示。</p>
-<h2 id="激活-Office"><a href="#激活-Office" class="headerlink" title="激活 Office"></a>激活 Office</h2><p><a href="#">安装 Office</a> 可以参考这篇文章。安装后我们不要立刻打开，老规矩以 <strong>管理员</strong> 模式运行 cmd</p>
-<p>找到你的 Office 安装目录，如：<code>C:\Program Files (x86)\Microsoft Office\Office16</code></p>
-<pre><code class="bash"># 设置 KMS 服务器地址
-cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /sethst:&#39;KMS服务器IP地址&#39;
-# 激活
-cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /act</code></pre>
-<p>看到 successful 字样表示激活成功。</p>
+              <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>日本語の中で、やっぱり一番難しい部分は敬語だと思っています。今回は自分が勉強したの知識点をまとめしようと思います。</p>
+<h2 id="日本語の種類"><a href="#日本語の種類" class="headerlink" title="日本語の種類"></a>日本語の種類</h2><p>敬語には、尊敬語・謙譲語・丁寧語の三種類である。そして謙譲語と丁寧語は再び <strong>「謙譲語・丁重語」</strong> と <strong>「丁寧語・美化語」</strong> に分かれます。<br>| 分類 | 働き | 区別方ほ |<br>| :— | :— | :—: |<br>| 尊敬語 | 動作主に対して敬う気持ちを表す | 相手側及び話題の行為など |<br>| 謙譲語 | 謙った言い方で相手への敬意を表す | 自分側の行為など |<br>| 丁重語 | 謙った言い方で相手への丁重を表す | 〜、相手が不必要 |<br>| 丁寧語 | 丁寧な言葉を使って敬意を表す | 自分側及び他人の行為など |<br>| 美化語 | 上品な言葉を使って敬意を表す | 〜、相手が不必要 |</p>
+<h2 id="敬語一覧表"><a href="#敬語一覧表" class="headerlink" title="敬語一覧表"></a>敬語一覧表</h2><table>
+<thead>
+<tr>
+<th align="left">辞書形</th>
+<th align="left">丁寧語</th>
+<th align="left">尊敬語(辞)</th>
+<th align="left">尊敬語(丁)</th>
+<th align="left">謙譲語(辞)</th>
+<th align="left">謙譲語(丁)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">する</td>
+<td align="left">します</td>
+<td align="left">なさる</td>
+<td align="left">為さいます</td>
+<td align="left">いたす</td>
+<td align="left">致します</td>
+</tr>
+<tr>
+<td align="left">くる</td>
+<td align="left">来ます</td>
+<td align="left">いらっしゃる<br/>おいでになる<br/>お越しになる<br/>お見えになる</td>
+<td align="left">いらっしゃいます<br/>おいでになります<br/>お越しになります<br/>お見えになります</td>
+<td align="left">参る<br/>うかがう</td>
+<td align="left">参ります<br/>伺います</td>
+</tr>
+<tr>
+<td align="left">行く</td>
+<td align="left">行きます</td>
+<td align="left">いらっしゃる<br/>おいでになる</td>
+<td align="left">いらっしゃいます<br/>おいでになります</td>
+<td align="left">参る<br/>うかがう</td>
+<td align="left">参ります<br/>伺います</td>
+</tr>
+<tr>
+<td align="left">いる</td>
+<td align="left">います</td>
+<td align="left">いらっしゃる<br>おいでになる</td>
+<td align="left">いらっしゃいます<br/>おいでになります</td>
+<td align="left">おる</td>
+<td align="left">おります</td>
+</tr>
+<tr>
+<td align="left">言う</td>
+<td align="left">言います</td>
+<td align="left">おっしゃる</td>
+<td align="left">仰います</td>
+<td align="left">申す<br/>申し上げる</td>
+<td align="left">申します<br/>申し上げます</td>
+</tr>
+<tr>
+<td align="left">聞く</td>
+<td align="left">聞きます</td>
+<td align="left">X</td>
+<td align="left">X</td>
+<td align="left">伺う</td>
+<td align="left">伺います</td>
+</tr>
+<tr>
+<td align="left">見る</td>
+<td align="left">見ます</td>
+<td align="left">ご覧になる</td>
+<td align="left">ご覧になります</td>
+<td align="left">拝見する</td>
+<td align="left">拝見します</td>
+</tr>
+<tr>
+<td align="left">見せる</td>
+<td align="left">見せます</td>
+<td align="left">お見せになる</td>
+<td align="left">お見せになります</td>
+<td align="left">お目に掛ける<br/>ご覧に入れる</td>
+<td align="left">お目にかけます<br>ご覧に入れます</td>
+</tr>
+<tr>
+<td align="left">食べる</td>
+<td align="left">食べます</td>
+<td align="left">召上げる</td>
+<td align="left">召し上がります</td>
+<td align="left">いただく</td>
+<td align="left">いただきます</td>
+</tr>
+<tr>
+<td align="left">飲む</td>
+<td align="left">飲みます</td>
+<td align="left">召上げる</td>
+<td align="left">召し上がります</td>
+<td align="left">いただく</td>
+<td align="left">いただきます</td>
+</tr>
+<tr>
+<td align="left">もらう</td>
+<td align="left">もらいます</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">いただく</td>
+<td align="left">いただきます</td>
+</tr>
+<tr>
+<td align="left">あげる</td>
+<td align="left">あげます</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">差し上げる</td>
+<td align="left">差し上げます</td>
+</tr>
+<tr>
+<td align="left">くれる</td>
+<td align="left">くれます</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">会う</td>
+<td align="left">会います</td>
+<td align="left">お会いになる<br>会われる</td>
+<td align="left">お会いになります<br/>会われます</td>
+<td align="left">お目にかかる</td>
+<td align="left">お目にかかります</td>
+</tr>
+<tr>
+<td align="left">知っている</td>
+<td align="left">知っています</td>
+<td align="left">ご存知だ</td>
+<td align="left">ご存知です</td>
+<td align="left">存じている<br/>存じ上げている</td>
+<td align="left">存じています<br/>存じ上げています</td>
+</tr>
+<tr>
+<td align="left">知らない</td>
+<td align="left">知りません</td>
+<td align="left">ご存知（で）ない</td>
+<td align="left">ご存知でないです<br/>ご存知ありません</td>
+<td align="left">存じない</td>
+<td align="left">存知ません</td>
+</tr>
+<tr>
+<td align="left">思う</td>
+<td align="left">思います</td>
+<td align="left">思いになる<br/>思われる</td>
+<td align="left">お思いになります<br/></td>
+<td align="left">存じる</td>
+<td align="left">存知ます</td>
+</tr>
+<tr>
+<td align="left">分かる</td>
+<td align="left">分かります</td>
+<td align="left">ご理解いただく</td>
+<td align="left">ご理解いただきます</td>
+<td align="left">承知する<br/>かしこまる</td>
+<td align="left">承知します<br/>畏まります</td>
+</tr>
+<tr>
+<td align="left">訪問する</td>
+<td align="left">訪問します</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody></table>
 
             </div>
             <hr>
@@ -227,10 +399,7 @@ cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /a
                   <span>
                 <i class="iconfont icon-inbox"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Windows/">Windows</a>
-                      &nbsp;
-                    
-                      <a class="hover-with-bg" href="/categories/CentOS/">CentOS</a>
+                      <a class="hover-with-bg" href="/categories/%E6%97%A5%E6%9C%AC%E8%AA%9E/">日本語</a>
                       &nbsp;
                     
                   </span>&nbsp;&nbsp;
@@ -239,13 +408,9 @@ cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /a
                   <span>
                 <i class="iconfont icon-tag"></i>
                     
-                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
+                      <a class="hover-with-bg" href="/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/">日本語</a>
                     
-                      <a class="hover-with-bg" href="/tags/Windows/">Windows</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Office/">Office</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%BF%80%E6%B4%BB/">激活</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%AC%E8%AA%9E/">敬語</a>
                     
                   </span>
                 
@@ -454,7 +619,7 @@ cscript &quot;C:\Program Files (x86)\Microsoft Office\Office16\ospp.vbs&quot; /a
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "CentOS 安装 vlmcsd 搭建 KMS 服务器&nbsp;",
+        "敬語の勉強メモ&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
