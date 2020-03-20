@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>CentOS 7.7 1908 编译安装 Nginx</title>
+    <link href="/37619.html"/>
+    <url>/37619.html</url>
+    
+    <content type="html"><![CDATA[<p>从源码编译 Nginx 相对于 RPM 软件包来说有更多的自定义性，我们可以指定 Nginx 模块的启用与否。</p><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><p>CentOS 7.7 1908</p><h2 id="安装-Nginx-依赖"><a href="#安装-Nginx-依赖" class="headerlink" title="安装 Nginx 依赖"></a>安装 Nginx 依赖</h2><ul><li><a href="http://pcre.org/" target="_blank" rel="noopener">PCRE</a> 支持正则表达式</li><li><a href="https://www.zlib.net/" target="_blank" rel="noopener">zlib</a> 支持 Gzip 压缩</li><li><a href="https://www.openssl.org/" target="_blank" rel="noopener">OpenSSL</a> 支持 HTTPS 协议</li></ul><h3 id="安装-PCRE"><a href="#安装-PCRE" class="headerlink" title="安装 PCRE"></a>安装 PCRE</h3><pre><code class="bash">$ wget https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.gz$ cd pcre-8.44.tar.gz$ ./configure$ make &amp;&amp; make install</code></pre><h3 id="安装-zlib"><a href="#安装-zlib" class="headerlink" title="安装 zlib"></a>安装 zlib</h3><pre><code class="bash">$ wget https://www.zlib.net/zlib-1.2.11.tar.gz$ cd zlib-1.2.11.tar.gz$ ./configure$ make &amp;&amp; make install</code></pre><h3 id="安装-OpenSSL"><a href="#安装-OpenSSL" class="headerlink" title="安装 OpenSSL"></a>安装 OpenSSL</h3><pre><code class="bash">$ wget https://www.openssl.org/source/openssl-1.1.1d.tar.gz$ cd openssl-1.1.1d.tar.gz$ ./config$ make &amp;&amp; make install$ echo &quot;/usr/local/lib64/&quot; &gt;&gt; /etc/ld.so.conf$ ldconfig</code></pre><h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><p>下载并解压最新稳定版本源码</p><pre><code class="bash">$ wget https://nginx.org/download/nginx-1.16.1.tar.gz$ tar zxf nginx-1.16.1.tar.gz$ cd nginx-1.16.1.tar.gz</code></pre><p>使用 <code>./configure</code> 脚本创建 <code>Makefile</code></p><pre><code class="bash">$ ./configure --prefix=/etc/nginx \--sbin-path=/usr/sbin/nginx \--modules-path=/usr/lib64/nginx/modules \--conf-path=/etc/nginx/nginx.conf \--error-log-path=/var/log/nginx/error.log \--http-log-path=/var/log/nginx/access.log \--pid-path=/var/run/nginx.pid \--lock-path=/var/run/nginx.lock \--http-client-body-temp-path=/var/cache/nginx/client_temp \--http-proxy-temp-path=/var/cache/nginx/proxy_temp \--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \--http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \--http-scgi-temp-path=/var/cache/nginx/scgi_temp \--user=nginx \--group=nginx \--with-compat \--with-file-aio \--with-threads \--with-http_gunzip_module \--with-http_gzip_static_module \--with-http_realip_module \--with-http_ssl_module \--with-http_stub_status_module \--with-http_sub_module \--with-http_v2_module \--with-stream \--with-stream_realip_module \--with-stream_ssl_module \--with-stream_ssl_preread_module \--with-pcre=../pcre-8.44 \--with-openssl=../openssl-1.1.1d \--with-zlib=../zlib-1.2.11$ make &amp;&amp; make install</code></pre><p>输出的 <code>Makefile</code> 信息</p><pre><code>Configuration summary  + using threads  + using PCRE library: ../pcre-8.44  + using OpenSSL library: ../openssl-1.1.1d  + using zlib library: ../zlib-1.2.11  nginx path prefix: &quot;/etc/nginx&quot;  nginx binary file: &quot;/usr/sbin/nginx&quot;  nginx modules path: &quot;/usr/lib64/nginx/modules&quot;  nginx configuration prefix: &quot;/etc/nginx&quot;  nginx configuration file: &quot;/etc/nginx/nginx.conf&quot;  nginx pid file: &quot;/var/run/nginx.pid&quot;  nginx error log file: &quot;/var/log/nginx/error.log&quot;  nginx http access log file: &quot;/var/log/nginx/access.log&quot;  nginx http client request body temporary files: &quot;/var/cache/nginx/client_temp&quot;  nginx http proxy temporary files: &quot;/var/cache/nginx/proxy_temp&quot;  nginx http fastcgi temporary files: &quot;/var/cache/nginx/fastcgi_temp&quot;  nginx http uwsgi temporary files: &quot;/var/cache/nginx/uwsgi_temp&quot;  nginx http scgi temporary files: &quot;/var/cache/nginx/scgi_temp&quot;</code></pre><p>创建 Nginx 用户</p><pre><code class="bash">$ groupadd nginx$ useradd -s /sbin/nologin -g nginx nginx -M</code></pre><p>创建 <code>/var/cache/nginx/</code> 目录</p><pre><code class="bash">$ mkdir -p /var/cache/nginx</code></pre><p>创建 Systemd 服务文件，写入下列内容至 <code>/usr/lib/systemd/system/nginx.service</code></p><pre><code>[Unit]Description=nginx - high performance web serverDocumentation=http://nginx.org/en/docs/After=network-online.target remote-fs.target nss-lookup.targetWants=network-online.target[Service]Type=forkingPIDFile=/var/run/nginx.pidExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.confExecReload=/bin/kill -s HUP $MAINPIDExecStop=/bin/kill -s TERM $MAINPID[Install]WantedBy=multi-user.target</code></pre><p>重载 Systemd 服务脚本并设置 Nginx 开机自启动</p><pre><code class="bash">$ systemctl daemon-reload$ systemctl enable nginx</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>敬語の勉強メモ</title>
     <link href="/49161.html"/>
     <url>/49161.html</url>
@@ -40,9 +53,9 @@
     
     <categories>
       
-      <category>CentOS</category>
-      
       <category>Windows</category>
+      
+      <category>CentOS</category>
       
     </categories>
     
