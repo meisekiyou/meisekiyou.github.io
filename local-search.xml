@@ -65,9 +65,9 @@
     
     <categories>
       
-      <category>Windows</category>
-      
       <category>CentOS</category>
+      
+      <category>Windows</category>
       
     </categories>
     
@@ -126,7 +126,7 @@
     
     <tags>
       
-      <tag>nvm</tag>
+      <tag>NVM</tag>
       
       <tag>Git</tag>
       
@@ -182,9 +182,9 @@
     
     <tags>
       
-      <tag>software</tag>
+      <tag>Software</tag>
       
-      <tag>anime images</tag>
+      <tag>Anime images</tag>
       
     </tags>
     
