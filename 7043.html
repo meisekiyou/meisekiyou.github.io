@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    765 字
+                    761 字
                   </span>
                 
 
@@ -249,8 +249,7 @@ $ chown -R git:git /home/git
 # 设置执行权限
 $ chmod +x blog.git/hooks/post-receive</code></pre>
 <h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><p>这里使用 yum 安装 Nginx，有需要编译安装的可以看<a href="https://blog.epnode.com/37619.html">这篇文章</a>。</p>
-<p><a href="http://nginx.org/en/linux_packages.html" target="_blank" rel="noopener">Nginx 官方源</a></p>
-<pre><code class="bash">$ rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+<h4 id="添加-Nginx-官方源"><a href="#添加-Nginx-官方源" class="headerlink" title="添加 Nginx 官方源"></a>添加 <a href="http://nginx.org/en/linux_packages.html" target="_blank" rel="noopener">Nginx 官方源</a></h4><pre><code class="bash">$ rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 $ yum install nginx -y</code></pre>
 <h4 id="配置-Nginx"><a href="#配置-Nginx" class="headerlink" title="配置 Nginx"></a>配置 Nginx</h4><pre><code class="bash"># 修改 Nginx 配置文件，指定网页根目录为 /var/www/blog
 $ vi /etc/nginx/nginx.conf
@@ -264,7 +263,7 @@ $ firewall-cmd --zone=public --add-port=80/tcp --permanent</code></pre>
 <pre><code>deploy:
   type: git
   repo: git@&#39;IP&#39;:/home/git/blog.git
-  branch: master</code></pre><p>在写完博文后使用 <code>hexo g -d</code> 就可以轻松部署到服务器上了。对了，善用 <code>hexo clean</code> 。</p>
+  branch: master</code></pre><p>在写完博文后使用 <code>hexo g -d</code> 就可以轻松部署到服务器上了。</p>
 
             </div>
             <hr>
