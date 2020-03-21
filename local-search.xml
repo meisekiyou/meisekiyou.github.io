@@ -8,7 +8,7 @@
     <link href="/2189.html"/>
     <url>/2189.html</url>
     
-    <content type="html"><![CDATA[<p>本次来分享一下 Let’s Encrypt 免费 SSL 证书的申请流程</p><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul><li>CentOS 7.7 1908</li><li>一个新鲜的域名</li></ul><h2 id="Let’s-Encrypt-证书"><a href="#Let’s-Encrypt-证书" class="headerlink" title="Let’s Encrypt 证书"></a>Let’s Encrypt 证书</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 是一个数字证书认证机构，旨在推广全民万维网服务器加密连接，为安全网站提供免费的 SSL/TLS 证书。Let’s Encrypt 签发的免费证书有效期为<strong>3个月</strong>。这里我使用 <a href="https://github.com/acmesh-official/acme.sh" target="_blank" rel="noopener">acme.sh</a> 来申请和续期 Let’s Encrypt 的证书。</p><a id="more"></a><h2 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h2><p>acme.sh 使用 cron 创建计划任务来续期证书，在安装 acme.sh 之前先安装 cron</p><pre><code class="bash">$ yum install cronie -y$ systemctl start crond$ systemctl enable crond</code></pre><p>接着就可以来安装 acme.sh 了</p><pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre><p>安装过程中可能会收到使用 standalone mode 需安装 socat 的警告，这里直接忽略。你问为什么？standalone mode 会使用 socat 创建一个伪装的 HTTP Server 导致与真正的网站起冲突，虽然可以在申请过程中暂时关闭网站，但是我懒。经过搜索 acme.sh 还支持 dns mode ，完美解决端口冲突问题。</p><h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Keys，具体方法如下图</p><p><img src="/img/cfapi.png" srcset="/img/loading.gif" alt=""></p><p>接着进入终端</p><pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;$ export CF_Email=&quot;EMAIL&quot;$ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre><p>Let’s Encrypt 也支持通配符证书 所以也可以直接申请通配符证书</p><pre><code>$ acme.sh --issue --dns dns_cf -d example.com -d *.example.com</code></pre><p>如果遇到没有找到 acme.sh 命令，可以输入以下命令解决</p><pre><code class="bash">alias acme.sh=~/.acme.sh/acme.sh</code></pre><h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>默认申请的证书放置在 <code>~/.acme.sh/</code> 下，但不要直接使用此目录下的证书，以免破坏目录结构。正确的方法是使用 <code>--installcert</code> 参数复制证书至相应的目录</p><pre><code class="bash"># 创建证书目录$ mkdir /etc/nginx/ssl# 在编辑完 HTTP 服务器配置文件后再复制证书$ acme.sh --install-cert -d epnode.com \--cert-file      /etc/nginx/ssl/cert.pem \--key-file       /etc/nginx/ssl/key.pem \--fullchain-file /etc/nginx/ssl/fullchain.pem \--reloadcmd      &quot;systemctl force-reload nginx&quot;</code></pre><p><code>reload</code> 并不会重载证书，应使用 <code>force-reload</code></p><p>关于 Nginx HTTPS 及 HTTP2 的配置可以参考<a href="#">这篇文章</a></p>]]></content>
+    <content type="html"><![CDATA[<p>本次来分享一下 Let’s Encrypt 免费 SSL 证书的申请流程</p><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul><li>CentOS 7.7 1908</li></ul><h2 id="Let’s-Encrypt-证书"><a href="#Let’s-Encrypt-证书" class="headerlink" title="Let’s Encrypt 证书"></a>Let’s Encrypt 证书</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 是一个数字证书认证机构，旨在推广全民万维网服务器加密连接，为安全网站提供免费的 SSL/TLS 证书。Let’s Encrypt 签发的免费证书有效期为<strong>3个月</strong>。这里我使用 <a href="https://github.com/acmesh-official/acme.sh" target="_blank" rel="noopener">acme.sh</a> 来申请和续期 Let’s Encrypt 的证书。</p><a id="more"></a><h2 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h2><p>acme.sh 使用 cron 创建计划任务来续期证书，在安装 acme.sh 之前先安装 cron</p><pre><code class="bash">$ yum install cronie -y$ systemctl start crond$ systemctl enable crond</code></pre><p>接着就可以来安装 acme.sh 了</p><pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre><p>安装过程中可能会收到使用 standalone mode 需安装 socat 的警告，这里直接忽略。你问为什么？standalone mode 会使用 socat 创建一个伪装的 HTTP Server 导致与真正的网站起冲突，虽然可以在申请过程中暂时关闭网站，但是我懒。经过搜索 acme.sh 还支持 dns mode ，完美解决端口冲突问题。</p><h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Keys，具体方法如下图</p><p><img src="/img/cfapi.png" srcset="/img/loading.gif" alt=""></p><p>接着进入终端</p><pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;$ export CF_Email=&quot;EMAIL&quot;$ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre><p>Let’s Encrypt 也支持通配符证书 所以也可以直接申请通配符证书</p><pre><code>$ acme.sh --issue --dns dns_cf -d example.com -d *.example.com</code></pre><p>如果遇到没有找到 acme.sh 命令，可以输入以下命令解决</p><pre><code class="bash">alias acme.sh=~/.acme.sh/acme.sh</code></pre><h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>默认申请的证书放置在 <code>~/.acme.sh/</code> 下，但不要直接使用此目录下的证书，以免破坏目录结构。正确的方法是使用 <code>--installcert</code> 参数复制证书至相应的目录</p><pre><code class="bash"># 创建证书目录$ mkdir /etc/nginx/ssl# 在编辑完 HTTP 服务器配置文件后再复制证书$ acme.sh --install-cert -d epnode.com \--cert-file      /etc/nginx/ssl/cert.pem \--key-file       /etc/nginx/ssl/key.pem \--fullchain-file /etc/nginx/ssl/fullchain.pem \--reloadcmd      &quot;systemctl force-reload nginx&quot;</code></pre><p><code>reload</code> 并不会重载证书，应使用 <code>force-reload</code></p><p>关于 Nginx HTTPS 及 HTTP2 的配置可以参考<a href="#">这篇文章</a></p>]]></content>
     
     
     <categories>
@@ -94,9 +94,9 @@
     
     <categories>
       
-      <category>Windows</category>
-      
       <category>CentOS</category>
+      
+      <category>Windows</category>
       
     </categories>
     
@@ -146,9 +146,9 @@
     
     <categories>
       
-      <category>macOS</category>
-      
       <category>CentOS</category>
+      
+      <category>macOS</category>
       
     </categories>
     
