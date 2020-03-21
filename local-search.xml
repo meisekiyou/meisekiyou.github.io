@@ -22,8 +22,6 @@
     
     <tags>
       
-      <tag>CentOS</tag>
-      
       <tag>Building nginx from Sources</tag>
       
     </tags>
@@ -49,8 +47,6 @@
     
     <tags>
       
-      <tag>日本語</tag>
-      
       <tag>敬語</tag>
       
     </tags>
@@ -69,22 +65,16 @@
     
     <categories>
       
-      <category>CentOS</category>
-      
       <category>Windows</category>
+      
+      <category>CentOS</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>CentOS</tag>
-      
-      <tag>Windows</tag>
-      
-      <tag>Office</tag>
-      
-      <tag>激活</tag>
+      <tag>Microsoft activation</tag>
       
     </tags>
     
@@ -109,7 +99,7 @@
     
     <tags>
       
-      <tag>macOS</tag>
+      <tag>mkfs</tag>
       
     </tags>
     
@@ -127,22 +117,22 @@
     
     <categories>
       
-      <category>CentOS</category>
-      
       <category>macOS</category>
+      
+      <category>CentOS</category>
       
     </categories>
     
     
     <tags>
       
-      <tag>CentOS</tag>
+      <tag>nvm</tag>
       
-      <tag>macOS</tag>
-      
-      <tag>Nginx</tag>
+      <tag>Git</tag>
       
       <tag>Hexo</tag>
+      
+      <tag>Nginx</tag>
       
     </tags>
     
@@ -166,8 +156,6 @@
     
     
     <tags>
-      
-      <tag>macOS</tag>
       
       <tag>Terminal</tag>
       
@@ -194,9 +182,9 @@
     
     <tags>
       
-      <tag>macOS</tag>
+      <tag>software</tag>
       
-      <tag>软件</tag>
+      <tag>anime images</tag>
       
     </tags>
     
