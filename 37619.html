@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>CentOS 7.7 1908 编译安装 Nginx ~ 我们即一体</title>
+  <title>CentOS 7.7 1908 编译安装 Nginx 1.16.1 ~ 我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    649 字
+                    652 字
                   </span>
                 
 
@@ -191,6 +191,8 @@
 <li><a href="https://www.zlib.net/" target="_blank" rel="noopener">zlib</a> 支持 Gzip 压缩</li>
 <li><a href="https://www.openssl.org/" target="_blank" rel="noopener">OpenSSL</a> 支持 HTTPS 协议</li>
 </ul>
+<a id="more"></a>
+
 <h3 id="安装-PCRE"><a href="#安装-PCRE" class="headerlink" title="安装 PCRE"></a>安装 PCRE</h3><pre><code class="bash">$ wget https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.gz
 $ cd pcre-8.44.tar.gz
 $ ./configure
@@ -265,7 +267,7 @@ $ make &amp;&amp; make install</code></pre>
   nginx http scgi temporary files: &quot;/var/cache/nginx/scgi_temp&quot;</code></pre><p>创建 Nginx 用户</p>
 <pre><code class="bash">$ groupadd nginx
 $ useradd -s /sbin/nologin -g nginx nginx -M</code></pre>
-<p>创建 <code>/var/cache/nginx/</code> 目录</p>
+<p>创建 Nginx 临时目录 <code>/var/cache/nginx/</code></p>
 <pre><code class="bash">$ mkdir -p /var/cache/nginx</code></pre>
 <p>创建 Systemd 服务文件，写入下列内容至 <code>/usr/lib/systemd/system/nginx.service</code></p>
 <pre><code>[Unit]
@@ -497,7 +499,7 @@ $ systemctl enable nginx</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "CentOS 7.7 1908 编译安装 Nginx&nbsp;",
+        "CentOS 7.7 1908 编译安装 Nginx 1.16.1&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
