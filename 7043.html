@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    761 字
+                    765 字
                   </span>
                 
 
@@ -257,9 +257,10 @@ $ vi /etc/nginx/nginx.conf
 $ nginx -t
 # 启动 Nginx 并设置开机自启动
 $ systemctl start nginx
+$ systemctl enable nginx
 # 如果开启了防火墙记得开放 http 端口
 $ firewall-cmd --zone=public --add-port=80/tcp --permanent</code></pre>
-<h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h2><p>打开本地博客根目录下的_config.yml文件，修改最后的deploy配置</p>
+<h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h2><p>打开本地博客根目录下的 _config.yml 文件，修改最后的 deploy 配置</p>
 <pre><code>deploy:
   type: git
   repo: git@&#39;IP&#39;:/home/git/blog.git
