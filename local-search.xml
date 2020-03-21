@@ -22,7 +22,7 @@
     
     <tags>
       
-      <tag>Building nginx from Sources</tag>
+      <tag>Nginx</tag>
       
     </tags>
     
@@ -65,9 +65,9 @@
     
     <categories>
       
-      <category>CentOS</category>
-      
       <category>Windows</category>
+      
+      <category>CentOS</category>
       
     </categories>
     
