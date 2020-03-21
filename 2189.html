@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>归档 ~ 我们即一体</title>
+  <title>使用 acme.sh 从 Let&#39;s Encrypt 获取免费 SSL 证书 ~ 我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -43,7 +43,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -129,6 +129,40 @@
             </span>
 
             
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期六, 三月 21日 2020, 1:16 下午
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    576 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      2 分钟
+                  </span>
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
+                    <i class="far fa-eye" aria-hidden="true"></i>
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>
+                
+              </p>
+            
           </div>
 
           
@@ -139,36 +173,102 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 8 篇文章</p>
-  <hr>
-  
-    
       
-      <p class="h5">2020</p>
-    
-    <a href="/14602.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">macOS Mojave 安装 waifu2x-converter-glsl</span>
-      <span style="float: right;">01-21</span>
-    </a>
-  
-</div>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>细心的朋友可能发现我的博客突然开启了 HTTPS 。本次来分享一下 Let’s Encrypt 免费 SSL 证书的申请流程</p>
+<h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul>
+<li>CentOS 7.7 1908</li>
+<li>一个新鲜的域名</li>
+</ul>
+<h2 id="Let’s-Encrypt-证书"><a href="#Let’s-Encrypt-证书" class="headerlink" title="Let’s Encrypt 证书"></a>Let’s Encrypt 证书</h2><p><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 是一个数字证书认证机构，旨在推广全民万维网服务器加密连接，为安全网站提供免费的 SSL/TLS 证书。Let’s Encrypt 签发的免费证书有效期为<strong>3个月</strong>。这里我使用 <a href="https://github.com/acmesh-official/acme.sh" target="_blank" rel="noopener">acme.sh</a> 来申请和续期 Let’s Encrypt 的证书。</p>
+<h2 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h2><p>acme.sh 使用 cron 创建计划任务来续期证书，在安装 acme.sh 之前先安装 cron</p>
+<pre><code class="bash">$ yum install cronie -y
+$ systemctl start crond
+$ systemctl enable crond</code></pre>
+<p>接着就可以来安装 acme.sh 了</p>
+<pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre>
+<p>安装过程中可能会收到使用 standalone mode 需安装 socat 的警告，这里直接忽略。你问为什么？standalone mode 会使用 socat 创建一个伪装的 HTTP Server 导致与真正的网站起冲突，虽然可以在申请过程中暂时关闭网站，但是我懒。经过搜索 acme.sh 还支持 dns mode ，完美解决端口冲突问题。</p>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Keys，具体方法如下图</p>
+<p><img src="/img/cfapi.png" srcset="/img/loading.gif" alt=""></p>
+<p>接着进入终端</p>
+<pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;
+$ export CF_Email=&quot;EMAIL&quot;
+$ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre>
+<p>Let’s Encrypt 也支持通配符证书 所以也可以直接申请通配符证书</p>
+<pre><code>$ acme.sh --issue --dns dns_cf -d example.com -d *.example.com</code></pre><p>如果遇到没有找到 acme.sh 命令，可以输入以下命令解决</p>
+<pre><code class="bash">alias acme.sh=~/.acme.sh/acme.sh</code></pre>
+<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>默认申请的证书放置在 <code>~/.acme.sh/</code> 下，但不要直接使用此目录下的证书，以免破坏目录结构。正确的方法是使用 <code>--installcert</code> 参数复制证书至相应的目录</p>
+<pre><code class="bash"># 创建证书目录
+$ mkdir /etc/nginx/ssl
+# 在编辑完 HTTP 服务器配置文件后再复制证书
+$ acme.sh --install-cert -d epnode.com \
+--cert-file      /etc/nginx/ssl/cert.pem \
+--key-file       /etc/nginx/ssl/key.pem \
+--fullchain-file /etc/nginx/ssl/fullchain.pem \
+--reloadcmd      &quot;systemctl force-reload nginx&quot;</code></pre>
+<p><code>reload</code> 并不会重载证书，应使用 <code>force-reload</code></p>
 
-              </div>
             </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CentOS/">CentOS</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/acme-sh/">acme.sh</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Let-s-Encrypt/">Let&#39;s Encrypt</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SSL/">SSL</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
           </div>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
   </main>
 
@@ -254,6 +354,57 @@
 
 
 
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
 
 
   <script  src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
@@ -296,7 +447,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "使用 acme.sh 从 Let's Encrypt 获取免费 SSL 证书&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
