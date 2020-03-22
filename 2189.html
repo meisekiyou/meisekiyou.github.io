@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    519 字
+                    523 字
                   </span>
                 
 
@@ -212,11 +212,11 @@ $ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre>
 $ mkdir /etc/nginx/ssl
 # 在编辑完 HTTP 服务器配置文件后再复制证书
 $ acme.sh --install-cert -d epnode.com \
---cert-file      /etc/nginx/ssl/cert.pem \
---key-file       /etc/nginx/ssl/key.pem \
+--cert-file /etc/nginx/ssl/cert.pem \
+--key-file /etc/nginx/ssl/key.pem \
 --fullchain-file /etc/nginx/ssl/fullchain.pem \
---reloadcmd      &quot;systemctl force-reload nginx&quot;</code></pre>
-<p><code>reload</code> 并不会重载证书，应使用 <code>force-reload</code></p>
+--reloadcmd &quot;systemctl force-reload nginx&quot;</code></pre>
+<p>Nginx 的<code>reload</code> 参数并不会重载证书，应使用 <code>force-reload</code></p>
 <p>关于 Nginx HTTPS 及 HTTP2 的配置可以参考<a href="#">这篇文章</a></p>
 
             </div>
