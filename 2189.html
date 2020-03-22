@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    523 字
+                    528 字
                   </span>
                 
 
@@ -198,7 +198,7 @@ $ systemctl enable crond</code></pre>
 <p>接着就可以来安装 acme.sh 了</p>
 <pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre>
 <p>安装过程中可能会收到使用 standalone mode 需安装 socat 的警告，忽略即可。</p>
-<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>这里我采用 dns mode 申请证书，以解决申请证书时的端口冲突困扰。我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Keys，具体方法如下图</p>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>这里我采用 dns mode 申请证书，以解决申请证书时的端口冲突困扰。我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Key，具体方法如下图</p>
 <p><img src="/img/cfapi.png" srcset="/img/loading.gif" alt=""></p>
 <p>接着进入终端</p>
 <pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;
@@ -208,16 +208,15 @@ $ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre>
 <pre><code>$ acme.sh --issue --dns dns_cf -d example.com -d *.example.com</code></pre><p>如果遇到没有找到 acme.sh 命令，可以输入以下命令解决</p>
 <pre><code class="bash">alias acme.sh=~/.acme.sh/acme.sh</code></pre>
 <h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>默认申请的证书放置在 <code>~/.acme.sh/</code> 下，但不要直接使用此目录下的证书，以免破坏目录结构。正确的方法是使用 <code>--installcert</code> 参数复制证书至相应的目录</p>
-<pre><code class="bash"># 创建证书目录
-$ mkdir /etc/nginx/ssl
-# 在编辑完 HTTP 服务器配置文件后再复制证书
-$ acme.sh --install-cert -d epnode.com \
+<p>创建用于存放证书的目录</p>
+<pre><code class="bash">$ mkdir /etc/nginx/ssl</code></pre>
+<p>在编辑完 HTTP 服务器配置文件后再复制证书。关于 Nginx HTTPS 及 HTTP2 的配置可以参考<a href="#">这篇文章</a>。</p>
+<pre><code class="bash">$ acme.sh --install-cert -d epnode.com \
 --cert-file /etc/nginx/ssl/cert.pem \
 --key-file /etc/nginx/ssl/key.pem \
 --fullchain-file /etc/nginx/ssl/fullchain.pem \
 --reloadcmd &quot;systemctl force-reload nginx&quot;</code></pre>
 <p>Nginx 的 <code>reload</code> 参数并不会重载证书，应使用 <code>force-reload</code></p>
-<p>关于 Nginx HTTPS 及 HTTP2 的配置可以参考<a href="#">这篇文章</a></p>
 
             </div>
             <hr>
