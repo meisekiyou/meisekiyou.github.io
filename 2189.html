@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    571 字
+                    519 字
                   </span>
                 
 
@@ -197,8 +197,8 @@ $ systemctl start crond
 $ systemctl enable crond</code></pre>
 <p>接着就可以来安装 acme.sh 了</p>
 <pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre>
-<p>安装过程中可能会收到使用 standalone mode 需安装 socat 的警告，这里直接忽略。你问为什么？standalone mode 会使用 socat 创建一个伪装的 HTTP Server 导致与真正的网站起冲突，当然也有在申请过程中暂时关闭网站这一选项。后来经过搜索发现 acme.sh 还支持 dns mode，完美解决端口冲突问题。</p>
-<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Keys，具体方法如下图</p>
+<p>安装过程中可能会收到使用 standalone mode 需安装 socat 的警告，忽略即可。</p>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>这里我采用 dns mode 申请证书，以解决申请证书时的端口冲突困扰。我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Keys，具体方法如下图</p>
 <p><img src="/img/cfapi.png" srcset="/img/loading.gif" alt=""></p>
 <p>接着进入终端</p>
 <pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;
