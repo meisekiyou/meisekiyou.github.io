@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    503 字
+                    491 字
                   </span>
                 
 
@@ -203,7 +203,7 @@ $ systemctl enable crond</code></pre>
 <pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;
 $ export CF_Email=&quot;EMAIL&quot;
 $ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre>
-<p>Let’s Encrypt 也支持通配符证书 所以也可以直接申请通配符证书</p>
+<p>Let’s Encrypt 也支持申请通配符证书</p>
 <pre><code>$ acme.sh --issue --dns dns_cf -d example.com -d *.example.com</code></pre><p>如果遇到没有找到 acme.sh 命令，可以输入以下命令解决</p>
 <pre><code class="bash">alias acme.sh=~/.acme.sh/acme.sh</code></pre>
 <h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>默认申请的证书放置在 <code>~/.acme.sh/</code> 下，但不要直接使用此目录下的证书，以免破坏目录结构。正确的方法是使用 <code>--installcert</code> 参数复制证书至相应的目录</p>
