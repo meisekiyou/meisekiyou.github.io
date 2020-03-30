@@ -24,14 +24,10 @@
     <content type="html"><![CDATA[<p><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a> 是一个数字证书认证机构，旨在推广全民万维网服务器加密连接，为安全网站提供免费的 SSL/TLS 证书。Let’s Encrypt 签发的免费证书有效期为<strong>3个月</strong>。这里我使用 <a href="https://github.com/acmesh-official/acme.sh" target="_blank" rel="noopener">acme.sh</a> 来申请和续期 Let’s Encrypt 的证书。</p><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul><li>CentOS 7.7 1908</li></ul><a id="more"></a><h2 id="安装-acme-sh"><a href="#安装-acme-sh" class="headerlink" title="安装 acme.sh"></a>安装 acme.sh</h2><p>acme.sh 使用 cron 创建计划任务来续期证书，在安装 acme.sh 之前先安装 cron</p><pre><code class="bash">$ yum install cronie -y$ systemctl start crond$ systemctl enable crond</code></pre><p>接着就可以来安装 acme.sh 了</p><pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre><p>安装成功后执行 <code>source ~/.bashrc</code> 更新环境变量</p><h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>这里我采用 dns mode 申请证书，以解决 standalone mode 需要 socat 占用 80 端口的困扰。我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Key，具体方法如下图</p><p><img src="/img/3.png" srcset="/img/loading.gif" alt=""></p><p>接着进入终端</p><pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;$ export CF_Email=&quot;EMAIL&quot;$ acme.sh --issue --dns dns_cf -d example.com -d www.example.com</code></pre><p>Let’s Encrypt 也支持申请通配符证书</p><pre><code>$ acme.sh --issue --dns dns_cf -d example.com -d *.example.com</code></pre><p>在 <code>source ~/.bashrc</code> 后还报错没有找到 acme.sh 命令，可以尝试手动添加别名</p><pre><code class="bash">alias acme.sh=~/.acme.sh/acme.sh</code></pre><h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>默认申请的证书放置在 <code>~/.acme.sh/</code> 下，但不要直接使用此目录下的证书，以免破坏目录结构。正确的方法是使用 <code>--installcert</code> 参数复制证书至相应的目录</p><p>创建用于存放证书的目录</p><pre><code class="bash">$ mkdir /etc/nginx/ssl</code></pre><p>在编辑完 HTTP 服务器配置文件后再复制证书。关于 Nginx HTTPS 及 HTTP2 的配置可以参考<a href="#">这篇文章</a>。</p><pre><code class="bash">$ acme.sh --install-cert -d epnode.com \--cert-file /etc/nginx/ssl/cert.pem \--key-file /etc/nginx/ssl/key.pem \--fullchain-file /etc/nginx/ssl/fullchain.pem \--reloadcmd &quot;systemctl force-reload nginx&quot;</code></pre><p>Nginx 的 <code>reload</code> 参数并不会重载证书，应使用 <code>force-reload</code></p>]]></content>
     
     
-    <categories>
-      
-      <category>CentOS</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>macOS</tag>
       
       <tag>acme.sh</tag>
       
@@ -53,16 +49,10 @@
     <content type="html"><![CDATA[<p>从源码编译 Nginx 相对于 RPM 软件包来说有更多的自定义性，我们可以指定 Nginx 模块的启用与否。</p><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><p>CentOS 7.7 1908</p><h2 id="安装-Nginx-依赖"><a href="#安装-Nginx-依赖" class="headerlink" title="安装 Nginx 依赖"></a>安装 Nginx 依赖</h2><ul><li><a href="http://pcre.org/" target="_blank" rel="noopener">PCRE</a> 支持正则表达式</li><li><a href="https://www.zlib.net/" target="_blank" rel="noopener">zlib</a> 支持 Gzip 压缩</li><li><a href="https://www.openssl.org/" target="_blank" rel="noopener">OpenSSL</a> 支持 HTTPS 协议</li></ul><a id="more"></a><h3 id="安装-PCRE"><a href="#安装-PCRE" class="headerlink" title="安装 PCRE"></a>安装 PCRE</h3><pre><code class="bash">$ wget https://ftp.pcre.org/pub/pcre/pcre-8.44.tar.gz$ cd pcre-8.44.tar.gz$ ./configure$ make &amp;&amp; make install</code></pre><h3 id="安装-zlib"><a href="#安装-zlib" class="headerlink" title="安装 zlib"></a>安装 zlib</h3><pre><code class="bash">$ wget https://www.zlib.net/zlib-1.2.11.tar.gz$ cd zlib-1.2.11.tar.gz$ ./configure$ make &amp;&amp; make install</code></pre><h3 id="安装-OpenSSL"><a href="#安装-OpenSSL" class="headerlink" title="安装 OpenSSL"></a>安装 OpenSSL</h3><pre><code class="bash">$ wget https://www.openssl.org/source/openssl-1.1.1d.tar.gz$ cd openssl-1.1.1d.tar.gz$ ./config$ make &amp;&amp; make install$ echo &quot;/usr/local/lib64/&quot; &gt;&gt; /etc/ld.so.conf$ ldconfig</code></pre><h2 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h2><p>下载并解压最新稳定版本源码</p><pre><code class="bash">$ wget https://nginx.org/download/nginx-1.16.1.tar.gz$ tar zxf nginx-1.16.1.tar.gz$ cd nginx-1.16.1.tar.gz</code></pre><p>使用 <code>./configure</code> 脚本创建 <code>Makefile</code></p><pre><code class="bash">$ ./configure --prefix=/etc/nginx \--sbin-path=/usr/sbin/nginx \--modules-path=/usr/lib64/nginx/modules \--conf-path=/etc/nginx/nginx.conf \--error-log-path=/var/log/nginx/error.log \--http-log-path=/var/log/nginx/access.log \--pid-path=/var/run/nginx.pid \--lock-path=/var/run/nginx.lock \--http-client-body-temp-path=/var/cache/nginx/client_temp \--http-proxy-temp-path=/var/cache/nginx/proxy_temp \--http-fastcgi-temp-path=/var/cache/nginx/fastcgi_temp \--http-uwsgi-temp-path=/var/cache/nginx/uwsgi_temp \--http-scgi-temp-path=/var/cache/nginx/scgi_temp \--user=nginx \--group=nginx \--with-compat \--with-file-aio \--with-threads \--with-http_gunzip_module \--with-http_gzip_static_module \--with-http_realip_module \--with-http_ssl_module \--with-http_stub_status_module \--with-http_sub_module \--with-http_v2_module \--with-stream \--with-stream_realip_module \--with-stream_ssl_module \--with-stream_ssl_preread_module \--with-pcre=../pcre-8.44 \--with-openssl=../openssl-1.1.1d \--with-zlib=../zlib-1.2.11$ make &amp;&amp; make install</code></pre><p>输出的 <code>Makefile</code> 信息</p><pre><code>Configuration summary  + using threads  + using PCRE library: ../pcre-8.44  + using OpenSSL library: ../openssl-1.1.1d  + using zlib library: ../zlib-1.2.11  nginx path prefix: &quot;/etc/nginx&quot;  nginx binary file: &quot;/usr/sbin/nginx&quot;  nginx modules path: &quot;/usr/lib64/nginx/modules&quot;  nginx configuration prefix: &quot;/etc/nginx&quot;  nginx configuration file: &quot;/etc/nginx/nginx.conf&quot;  nginx pid file: &quot;/var/run/nginx.pid&quot;  nginx error log file: &quot;/var/log/nginx/error.log&quot;  nginx http access log file: &quot;/var/log/nginx/access.log&quot;  nginx http client request body temporary files: &quot;/var/cache/nginx/client_temp&quot;  nginx http proxy temporary files: &quot;/var/cache/nginx/proxy_temp&quot;  nginx http fastcgi temporary files: &quot;/var/cache/nginx/fastcgi_temp&quot;  nginx http uwsgi temporary files: &quot;/var/cache/nginx/uwsgi_temp&quot;  nginx http scgi temporary files: &quot;/var/cache/nginx/scgi_temp&quot;</code></pre><p>创建 Nginx 用户</p><pre><code class="bash">$ groupadd nginx$ useradd -s /sbin/nologin -g nginx nginx -M</code></pre><p>创建 Nginx 临时目录 <code>/var/cache/nginx/</code></p><pre><code class="bash">$ mkdir -p /var/cache/nginx</code></pre><p>创建 Systemd 服务文件，写入下列内容至 <code>/usr/lib/systemd/system/nginx.service</code></p><pre><code>[Unit]Description=nginx - high performance web serverDocumentation=http://nginx.org/en/docs/After=network-online.target remote-fs.target nss-lookup.targetWants=network-online.target[Service]Type=forkingPIDFile=/var/run/nginx.pidExecStart=/usr/sbin/nginx -c /etc/nginx/nginx.confExecReload=/bin/kill -s HUP $MAINPIDExecStop=/bin/kill -s TERM $MAINPID[Install]WantedBy=multi-user.target</code></pre><p>重载 Systemd 服务脚本并设置 Nginx 开机自启动</p><pre><code class="bash">$ systemctl daemon-reload$ systemctl enable nginx</code></pre>]]></content>
     
     
-    <categories>
-      
-      <category>CentOS</category>
-      
-      <category>Nginx</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>CentOS</tag>
       
       <tag>Nginx</tag>
       
@@ -80,14 +70,10 @@
     <content type="html"><![CDATA[<p>日本語の中で、やっぱり一番難しい部分は敬語だと思っています。今回は自分が勉強したの知識点をまとめしました。もし何か間違っていましたら訂正してください！</p><h2 id="日本語の種類"><a href="#日本語の種類" class="headerlink" title="日本語の種類"></a>日本語の種類</h2><p>敬語には、尊敬語・謙譲語・丁寧語の三種類である。そして謙譲語と丁寧語は再び <strong>「謙譲語・丁重語」</strong> と <strong>「丁寧語・美化語」</strong> に分かれます。</p><a id="more"></a><table><thead><tr><th align="left">分類</th><th align="left">働き</th><th align="center">区別方ほ</th></tr></thead><tbody><tr><td align="left">尊敬語</td><td align="left">動作主に対して敬う気持ちを表す</td><td align="center">相手側及び話題の行為など</td></tr><tr><td align="left">謙譲語</td><td align="left">謙った言い方で相手への敬意を表す</td><td align="center">自分側の行為など</td></tr><tr><td align="left">丁重語</td><td align="left">謙った言い方で相手への丁重を表す</td><td align="center">〜、相手が不必要</td></tr><tr><td align="left">丁寧語</td><td align="left">丁寧な言葉を使って敬意を表す</td><td align="center">自分側及び他人の行為など</td></tr><tr><td align="left">美化語</td><td align="left">上品な言葉を使って敬意を表す</td><td align="center">〜、相手が不必要</td></tr></tbody></table><h2 id="敬語一覧表"><a href="#敬語一覧表" class="headerlink" title="敬語一覧表"></a>敬語一覧表</h2><table><thead><tr><th align="left">辞書形</th><th align="left">丁寧語</th><th align="left">尊敬語(辞)</th><th align="left">尊敬語(丁)</th><th align="left">謙譲語(辞)</th><th align="left">謙譲語(丁)</th></tr></thead><tbody><tr><td align="left">する</td><td align="left">します</td><td align="left">なさる</td><td align="left">為さいます</td><td align="left">いたす</td><td align="left">致します</td></tr><tr><td align="left">くる</td><td align="left">来ます</td><td align="left">いらっしゃる<br/>おいでになる<br/>お越しになる<br/>お見えになる</td><td align="left">いらっしゃいます<br/>おいでになります<br/>お越しになります<br/>お見えになります</td><td align="left">参る<br/>うかがう</td><td align="left">参ります<br/>伺います</td></tr><tr><td align="left">行く</td><td align="left">行きます</td><td align="left">いらっしゃる<br/>おいでになる</td><td align="left">いらっしゃいます<br/>おいでになります</td><td align="left">参る<br/>うかがう</td><td align="left">参ります<br/>伺います</td></tr><tr><td align="left">いる</td><td align="left">います</td><td align="left">いらっしゃる<br>おいでになる</td><td align="left">いらっしゃいます<br/>おいでになります</td><td align="left">おる</td><td align="left">おります</td></tr><tr><td align="left">言う</td><td align="left">言います</td><td align="left">おっしゃる</td><td align="left">仰います</td><td align="left">申す<br/>申し上げる</td><td align="left">申します<br/>申し上げます</td></tr><tr><td align="left">聞く</td><td align="left">聞きます</td><td align="left">お聞きになる</td><td align="left">お聞きになります</td><td align="left">伺う</td><td align="left">伺います</td></tr><tr><td align="left">見る</td><td align="left">見ます</td><td align="left">ご覧になる</td><td align="left">ご覧になります</td><td align="left">拝見する</td><td align="left">拝見します</td></tr><tr><td align="left">見せる</td><td align="left">見せます</td><td align="left">お見せになる</td><td align="left">お見せになります</td><td align="left">お目に掛ける<br/>ご覧に入れる</td><td align="left">お目にかけます<br>ご覧に入れます</td></tr><tr><td align="left">食べる</td><td align="left">食べます</td><td align="left">召上げる</td><td align="left">召し上がります</td><td align="left">いただく</td><td align="left">いただきます</td></tr><tr><td align="left">飲む</td><td align="left">飲みます</td><td align="left">召上げる</td><td align="left">召し上がります</td><td align="left">いただく</td><td align="left">いただきます</td></tr><tr><td align="left">もらう</td><td align="left">もらいます</td><td align="left"></td><td align="left"></td><td align="left">いただく</td><td align="left">いただきます</td></tr><tr><td align="left">あげる</td><td align="left">あげます</td><td align="left"></td><td align="left"></td><td align="left">差し上げる</td><td align="left">差し上げます</td></tr><tr><td align="left">くれる</td><td align="left">くれます</td><td align="left">くださる</td><td align="left">くださいます</td><td align="left"></td><td align="left"></td></tr><tr><td align="left">会う</td><td align="left">会います</td><td align="left">お会いになる<br>会われる</td><td align="left">お会いになります<br/>会われます</td><td align="left">お目にかかる</td><td align="left">お目にかかります</td></tr><tr><td align="left">知っている</td><td align="left">知っています</td><td align="left">ご存知だ</td><td align="left">ご存知です</td><td align="left">存じている<br/>存じ上げている</td><td align="left">存じています<br/>存じ上げています</td></tr><tr><td align="left">知らない</td><td align="left">知りません</td><td align="left">ご存知（で）ない</td><td align="left">ご存知でないです<br/>ご存知ありません</td><td align="left">存じない</td><td align="left">存知ません</td></tr><tr><td align="left">思う</td><td align="left">思います</td><td align="left">思いになる<br/>思われる</td><td align="left">お思いになります<br/></td><td align="left">存じる</td><td align="left">存知ます</td></tr><tr><td align="left">分かる</td><td align="left">分かります</td><td align="left">ご理解いただく</td><td align="left">ご理解いただきます</td><td align="left">承知する<br/>かしこまる</td><td align="left">承知します<br/>畏まります</td></tr></tbody></table><p><strong>つつく…</strong></p>]]></content>
     
     
-    <categories>
-      
-      <category>日本語</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>日本語</tag>
       
       <tag>敬語</tag>
       
@@ -105,16 +91,12 @@
     <content type="html"><![CDATA[<p>KMS(Key Management Service) 是微软公司的一种产品激活机制。</p><ul><li>本文章仅供学习讨论，相关的软件请在 24 小时内删除</li><li>KMS 激活有效期仅 <strong>180</strong> 天（可续期</li><li>请使用正版产品</li></ul><a id="more"></a><h2 id="安装-vlmcsd"><a href="#安装-vlmcsd" class="headerlink" title="安装 vlmcsd"></a>安装 <a href="https://github.com/Wind4/vlmcsd/" target="_blank" rel="noopener">vlmcsd</a></h2><p>首先在<a href="https://github.com/Wind4/vlmcsd/releases" target="_blank" rel="noopener">这里</a>下载最新的版本</p><pre><code class="bash">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gztar xf binaries.tar.gz -C /usr/local/binaries/Linux/intel/static/# 创建相应架构二进制执行文件的软连接ln -s /usr/local/binaries/Linux/intel/static/vlmcsd-x64-musl-static /usr/sbin/vlmcsd# 运行并查看进程vlmcsdnetstat -apn | grep vlmcsd# 开放 vlmcsd 端口firewall-cmd --zone=public --add-port=1688/tcp --permanent</code></pre><h2 id="激活-Windows"><a href="#激活-Windows" class="headerlink" title="激活 Windows"></a>激活 Windows</h2><p>首先你要确保系统为 <strong>批量激活版本</strong>，即 VL 版本。其镜像一般内置 GVLK key，非 VL 版本的 Windows 也可以手动输入 GVLK key 来使用 KMS。Windows 的 GVLK key 可以在<a href="https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys" target="_blank" rel="noopener">这里</a>获取。Office 2019 和 2016 的 GVLK key 在<a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>，2013 和 2010 则分别在<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/dn385360(v=office.15)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>和<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/office-2010/ee624355(v=office.14)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>。</p><p>以 <strong>管理员</strong> 模式运行 cmd</p><pre><code class="bash"># 设置 GVLK keyslmgr /ipk &#39;GVLK key&#39;# 设置 KMS 服务器地址slmgr /skms &#39;KMS服务器IP地址&#39;# 激活slmgr /ato</code></pre><p>成功后会弹窗提示。</p><h2 id="激活-Office"><a href="#激活-Office" class="headerlink" title="激活 Office"></a>激活 Office</h2><p>安装批量激活版 Office 可以参考<a href="https://blog.epnode.com/21799.html">这篇</a>文章。安装后我们不要立刻打开，老规矩以 <strong>管理员</strong> 模式运行 cmd</p><p>找到你的 Office 安装目录，如：<code>C:\Program Files\Microsoft Office\Office16</code></p><pre><code class="bash"># 设置 GVLK key，如自带 GVLK key 可跳过cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /inpkey:&#39;GVLK key&#39;# 设置 KMS 服务器地址cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /sethst:&#39;KMS服务器IP地址&#39;# 激活cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /act</code></pre><p>看到 successful 字样表示激活成功。</p>]]></content>
     
     
-    <categories>
-      
-      <category>CentOS</category>
-      
-      <category>Windows</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>CentOS</tag>
+      
+      <tag>Windows</tag>
       
       <tag>Microsoft activation</tag>
       
@@ -132,14 +114,10 @@
     <content type="html"><![CDATA[<p><a href="http://e2fsprogs.sourceforge.net/" target="_blank" rel="noopener">e2fsprogs</a> 是维护 ext2/3/4 文件系统的工具，但在 macOS 上并未预装。</p><h2 id="安装-e2fsprogs"><a href="#安装-e2fsprogs" class="headerlink" title="安装 e2fsprogs"></a>安装 e2fsprogs</h2><p><code>brew install e2fsprogs</code></p><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>首先获取磁盘和分区信息，在 Terminal 中执行</p><pre><code class="bash">diskutil list</code></pre><p>随后卸载磁盘格式化为 ext4 分区，这里用 <code>/dev/disk2</code> 进行演示</p><pre><code class="bash">diskutil unmountdisk /dev/disk2sudo $(brew --prefix e2fsprogs)/sbin/mkfs.ext4 /dev/disk2</code></pre>]]></content>
     
     
-    <categories>
-      
-      <category>macOS</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>macOS</tag>
       
       <tag>mkfs</tag>
       
@@ -157,16 +135,12 @@
     <content type="html"><![CDATA[<p>在折腾的过后往往都需要进行总结记录，相比〇〇笔记来说我更喜欢使用博客进行记录。</p><h2 id="基本设想"><a href="#基本设想" class="headerlink" title="基本设想"></a>基本设想</h2><ul><li>本地 Hexo 生成静态文件，使用 Git 同步至服务器仓库</li><li>服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 Nginx 网站根目录</li><li>通过 Nginx 转发，实现博客访问</li></ul><a id="more"></a><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul><li>本地：macOS Mojave 10.14.6</li><li>服务器：CentOS 7.7 1908</li></ul><h2 id="本地环境搭建"><a href="#本地环境搭建" class="headerlink" title="本地环境搭建"></a>本地环境搭建</h2><p><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 依赖于 <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> 和 <a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">Node.js</a> 。由于我装了 <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener">Xcode</a> 所以自带 Git 。至于 Node.js 我推荐使用 <a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">Node Version Manager</a> 进行管理和安装。</p><h3 id="安装-nvm"><a href="#安装-nvm" class="headerlink" title="安装 nvm"></a>安装 nvm</h3><pre><code class="bash">$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</code></pre><p>在没有 <code>~/.bash_profile</code> 的情况下还需手动创建并写入下列内容以添加环境变量。</p><pre><code>export NVM_DIR=&quot;$HOME/.nvm&quot;[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; \. &quot;$NVM_DIR/nvm.sh&quot;</code></pre><p>别忘了 <code>source ~/.bash_profile</code> 使其生效</p><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>安装最新的 LTS 版本</p><pre><code class="bash">$ nvm install --lts# 检查版本$ node -vv12.16.1$ npm -v6.13.4</code></pre><h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>Git 和 Node.js 都安装完成后就可以使用 npm 安装 Hexo 了。</p><pre><code class="bash">$ npm install -g hexo-cli</code></pre><p>接着创建博客的目录并初始化.</p><pre><code class="bash">$ hexo init blog$ cd blog$ npm install</code></pre><p>为了使用 <code>hexo d</code> 进行同步我们还需要安装插件和生成密钥</p><pre><code class="bash">$ npm install hexo-deployer-git --save$ ssh-keygen -t rsa -C &quot;邮箱地址&quot;</code></pre><p>输出密钥内容到屏幕上</p><pre><code class="bash">$ cat ~/.ssh/id_rsa.pub</code></pre><p>至此本地环境配置完毕。</p><h2 id="服务器环境搭建"><a href="#服务器环境搭建" class="headerlink" title="服务器环境搭建"></a>服务器环境搭建</h2><h3 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h3><pre><code class="bash">$ yum update -y$ yum install git -y</code></pre><h4 id="配置-Git-用户"><a href="#配置-Git-用户" class="headerlink" title="配置 Git 用户"></a>配置 Git 用户</h4><pre><code class="bash"># 设置名字和邮件地址$ git config --global user.name &#39;name&#39;$ git config --global user.email &#39;email&#39;# 创建 git 用户$ groupadd git$ useradd -s /usr/bin/git-shell -g git git# 配置密钥登入$ cd /home/git$ mkdir .ssh# 在 authorized_keys 中写入本地的公钥信息$ vi .ssh/authorized_keys# 设置权限$ chmod 700 .ssh$ chmod 600 .ssh/authorized_keys</code></pre><h4 id="创建裸仓库并配置-Git-Hooks"><a href="#创建裸仓库并配置-Git-Hooks" class="headerlink" title="创建裸仓库并配置 Git Hooks"></a>创建裸仓库并配置 Git Hooks</h4><pre><code class="bash">$ git init --bare blog.git$ vi blog.git/hooks/post-receive</code></pre><p>写入如下内容</p><pre><code>#!/bin/shgit --work-tree=/var/www/blog --git-dir=/home/git/blog.git checkout -f</code></pre><p>善后工作</p><pre><code class="bash"># 创建网站根目录$ mkdir -p /var/www/blog# 设置目录所有者$ chown -R git:git /var/www/blog$ chown -R git:git /home/git# 设置执行权限$ chmod +x blog.git/hooks/post-receive</code></pre><h3 id="安装-Nginx"><a href="#安装-Nginx" class="headerlink" title="安装 Nginx"></a>安装 Nginx</h3><p>这里使用 yum 安装 <a href="https://nginx.org/en/" target="_blank" rel="noopener">Nginx</a> ，有需要编译安装的可以看<a href="https://blog.epnode.com/37619.html">这篇文章</a>。</p><h4 id="添加-Nginx-官方源"><a href="#添加-Nginx-官方源" class="headerlink" title="添加 Nginx 官方源"></a>添加 <a href="http://nginx.org/en/linux_packages.html" target="_blank" rel="noopener">Nginx 官方源</a></h4><pre><code class="bash">$ rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm$ yum install nginx -y</code></pre><h4 id="配置-Nginx"><a href="#配置-Nginx" class="headerlink" title="配置 Nginx"></a>配置 Nginx</h4><pre><code class="bash"># 修改 Nginx 配置文件，指定网页根目录为 /var/www/blog$ vi /etc/nginx/nginx.conf# 修改后检查配置文件$ nginx -t# 启动 Nginx 并设置开机自启动$ systemctl start nginx$ systemctl enable nginx# 如果开启了防火墙记得开放 http 端口$ firewall-cmd --zone=public --add-port=80/tcp --permanent</code></pre><h2 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h2><p>打开<strong>本地</strong>博客根目录下的 _config.yml 文件，修改最后的 deploy 配置</p><pre><code>deploy:  type: git  repo: git@&#39;IP&#39;:/home/git/blog.git  branch: master</code></pre><p>在写完博文后使用 <code>hexo g -d</code> 就可以轻松部署到服务器上了。</p>]]></content>
     
     
-    <categories>
-      
-      <category>macOS</category>
-      
-      <category>CentOS</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>macOS</tag>
+      
+      <tag>CentOS</tag>
       
       <tag>NVM</tag>
       
@@ -190,14 +164,10 @@
     <content type="html"><![CDATA[<p>今回は自宅で学校のサーバーを利用するための設定を調べてメモに書きました。初めて日本語で書くので、もし何か間違っていましたら訂正してください！</p><a id="more"></a><h2 id="環境確認"><a href="#環境確認" class="headerlink" title="環境確認"></a>環境確認</h2><ul><li>macOS Mojave 10.14.6</li></ul><h2 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h2><pre><code class="bash">vi ~/.bash_profile</code></pre><p><code>~/.bash_profile</code> に書く</p><pre><code class="bash">alias proxy=&#39;export all_proxy=socks5://127.0.0.1:1080&#39;alias unproxy=&#39;unset all_proxy&#39;</code></pre><h2 id="使う方法"><a href="#使う方法" class="headerlink" title="使う方法"></a>使う方法</h2><pre><code class="bash">proxy　#ONunproxy #OFF</code></pre><h2 id="curlで自分のIPを確認する"><a href="#curlで自分のIPを確認する" class="headerlink" title="curlで自分のIPを確認する"></a>curlで自分のIPを確認する</h2><pre><code class="bash">curl inet-ip.info</code></pre>]]></content>
     
     
-    <categories>
-      
-      <category>macOS</category>
-      
-    </categories>
-    
     
     <tags>
+      
+      <tag>macOS</tag>
       
       <tag>Terminal</tag>
       
@@ -215,16 +185,12 @@
     <content type="html"><![CDATA[<p><a href="https://github.com/nagadomi/waifu2x" target="_blank" rel="noopener">waifu2x</a> 是使用 NVIDIA CUDA 技术的深度卷积神经网路的图片缩放降噪程序。在新版 macOS 不支持 NVIDIA 显卡情况下我们可以使用 <a href="https://github.com/ueshita/waifu2x-converter-glsl" target="_blank" rel="noopener">waifu2x-converter-glsl</a> 分支利用 OpenGL 替代实现。</p><a id="more"></a><h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul><li>macOS Mojave 10.14.6</li><li>Xcode 11.3.1</li><li>Homebrew 2.2.6</li><li>Intel UHD Graphics 630</li></ul><h2 id="编译前准备"><a href="#编译前准备" class="headerlink" title="编译前准备"></a>编译前准备</h2><p>waifu2x-converter-glsl 依赖于 OpenCV 和 GLFW，这里我们使用 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a> 安装</p><pre><code class="bash">brew install opencv glfw</code></pre><p><code>brew install</code> 安装的应用默认目录为 <code>/usr/local/Cellar/</code></p><h2 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h2><pre><code class="bash">git clone https://github.com/ueshita/waifu2x-converter-glslcd waifu2x-converter-glsl/buildopen waifu2x-converter-glsl.xcodeproj</code></pre><h2 id="替换库文件"><a href="#替换库文件" class="headerlink" title="替换库文件"></a>替换库文件</h2><p>替换 4 个失效的库文件<br><img src="/img/1.png" srcset="/img/loading.gif" alt=""></p><h2 id="添加Header-Search-Paths"><a href="#添加Header-Search-Paths" class="headerlink" title="添加Header Search Paths"></a>添加Header Search Paths</h2><p><img src="/img/2.png" srcset="/img/loading.gif" alt=""></p><h2 id="编译安装"><a href="#编译安装" class="headerlink" title="编译安装"></a>编译安装</h2><pre><code class="bash">xcodebuild -project waifu2x-converter-glsl.xcodeproj -target waifu2x-converter-glslcp build/Release/waifu2x-converter-glsl ..chmod +x ../waifu2x-converter-glsl</code></pre><h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><pre><code class="bash">./waifu2x-converter-glsl -i example.png -m noise_scale -j 8 --scale_ratio 1.6 --noise_level 2</code></pre><h2 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h2><p><code>xcode-select: error: tool &#39;xcodebuild&#39; requires Xcode, but active developer directory &#39;/Library/Developer/CommandLineTools&#39; is a command line tools instance</code></p><pre><code class="bash">sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code></pre><p>指定 Command Line Tools 路径</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>整个编译还是很顺利的，后续可以在 ~/.bash_profile 添加环境变量在任意目录运行，这里就不演示了。</p>]]></content>
     
     
-    <categories>
-      
-      <category>macOS</category>
-      
-    </categories>
-    
     
     <tags>
       
-      <tag>Software</tag>
+      <tag>macOS</tag>
+      
+      <tag>waifu2x</tag>
       
       <tag>Anime images</tag>
       
