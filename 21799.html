@@ -141,7 +141,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    520 字
+                    795 字
                   </span>
                 
 
@@ -149,7 +149,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      2 分钟
+                      3 分钟
                   </span>
                 
 
@@ -184,8 +184,9 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>Office Deployment Tool 简称 ODT ，是微软提供的用于安装 Office 的命令行工具。本次我将演示使用 ODT 安装 Office ProPlus 2019 Volume。</p>
-<h2 id="下载并安装-ODT"><a href="#下载并安装-ODT" class="headerlink" title="下载并安装 ODT"></a>下载并安装 ODT</h2><p>首先我们下载并安装 ODT。点击<a href="https://www.microsoft.com/en-us/download/details.aspx?id=49117" target="_blank" rel="noopener">这里</a>，并点击页面中的 Download 按钮进行下载。</p>
+              <p>Office Deployment Tool 简称 ODT ，是微软提供的用于安装 Office 的命令行工具。自不知道哪一版 Office 取消自定义安装后，每次安装 Office 都会捆绑 OneNote、Outlook、Skype 等不需要的组件。至此我们可以使用官方提供的 ODT 工具定制安装 Office。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>如果在之前已经安装过 Office，建议使用 官方提供的卸载程序 卸载旧版本，非 365 用户还需要注意备份 Office 密钥。本次演示的 Office 版本为 ProPlus 2019 Volume，请根据自己的需要安装合适的版本！</p>
+<h2 id="下载并安装-ODT"><a href="#下载并安装-ODT" class="headerlink" title="下载并安装 ODT"></a>下载并安装 ODT</h2><p>首先我们下载并安装 ODT。点击 <a href="https://www.microsoft.com/en-us/download/details.aspx?id=49117" target="_blank" rel="noopener">这里</a>，并点击页面中的 Download 按钮进行下载。</p>
 <p>接着双击运行下载的 <code>officedeploymenttool_12325-20288.exe</code> 应用程序。最后我们会得到以下几个文件<br><img src="/img/4.png" srcset="/img/loading.gif" alt=""></p>
 <a id="more"></a>
 
@@ -206,14 +207,113 @@
 &lt;Display Level=&quot;Full&quot; AcceptEULA=&quot;TRUE&quot; /&gt;
 &lt;Updates Enabled=&quot;TRUE&quot; Channel=&quot;PerpetualVL2019&quot; /&gt;
 &lt;/Configuration&gt;</code></pre>
-<p>参数详解</p>
-<blockquote>
-<p>OfficeClientEdition=”64”   安装64位 Office<br>Channel=”PerpetualVL2019”   指定更新频道为PerpetualVL2019<br>Product ID=”Proplus2019Volume”    指定安装 Office 专业增强 VOL 版<br>PIDKEY    指定 KMS 客户端密钥<br>Language  指定语言为简体中文<br>ExcludeApp    指定排除的产品<br>Display Level 是否显示安装界面<br>AcceptEULA    是否隐藏许可条款界面<br>Updates Enabled   是否开启更新</p>
+<h3 id="参数详解"><a href="#参数详解" class="headerlink" title="参数详解"></a>参数详解</h3><blockquote>
+<p>OfficeClientEdition=”64”   安装64位 Office<br>Channel=”PerpetualVL2019”   指定更新频道为 PerpetualVL2019<br>Product ID=”Proplus2019Volume”    指定安装 Office 专业增强 VOL 版<br>PIDKEY    指定激活密钥<br>Language  指定语言为简体中文<br>ExcludeApp    指定排除的产品<br>Display Level 是否显示安装界面<br>AcceptEULA    是否隐藏许可条款界面<br>Updates Enabled   是否开启更新</p>
 </blockquote>
-<p>更多配置可以查阅相关文档或在<a href="https://config.office.com/" target="_blank" rel="noopener">这里</a>在线编辑</p>
+<p>除了手动编写还可以在 <a href="https://config.office.com/" target="_blank" rel="noopener">这里</a> 在线编辑。</p>
+<h3 id="关于-Product-ID"><a href="#关于-Product-ID" class="headerlink" title="关于 Product ID"></a>关于 Product ID</h3><p>定制 ODT 配置文件，我们要搞清楚各版本的区别，错误的版本可能会导致无法激活 Office</p>
+<p>感谢 <a href="https://www.tenforums.com/tutorials/123233-custom-install-change-microsoft-office-office-deployment-tool.html?__cf_chl_jschl_tk__=716aa1e7bac23c427293d2b8d4ba5ee9a5c23ec8-1585574530-0-Ae3F9_9uxZ4JXmFAxsOuawOZCGSyhk7rlxxcrP9raCIXZ_Y49eFotVmheGEh6l93HTJbLTteKE2FmFwBmu7ohEG_Frez1Bcd7QaiclDT--F1Iz90QkNpLfAth0TRg7_6YygKZEZqfsFU8R6UKlckfBJXYPGBO9tp4AH54fQbNO_Ygphs12cMOEFoTaLYYWFGqJMGCD5WH-EDjy_dkzjgC-V-a7snq_UChy7oUeAYKFvMjrzZDwQvjaX5t7kwp4BEGugkbShkf1d_Wor7ql_t5wdHtPjEk3JrlUgHXUSX90KEdPCEvQ4zht0I1YgM0YbiDYT-UcUzTjkzjuXtHYsvbYu4srZXtYXSSinfoadIUVDIf7GtTYNk_gJ6IGzGMxxOMw" target="_blank" rel="noopener">Tenfourms</a> 总结的表格</p>
+<ul>
+<li>P = 零售密钥激活 </li>
+<li>S = Office 365 个人、家庭、企业或企业订阅/许可证</li>
+<li>V = 批量授权激活（KMS 或 MAK）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">版本</th>
+<th align="left">Product ID</th>
+<th align="left">激活方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">O365 Home and Student</td>
+<td align="left">HomeStudentRetail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">O365 Home and Business</td>
+<td align="left">HomeBusinessRetail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">Office 2016 Personal</td>
+<td align="left">PersonalRetail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">O365 Personal</td>
+<td align="left">O365PersonalRetail</td>
+<td align="left">S</td>
+</tr>
+<tr>
+<td align="left">O365 Home</td>
+<td align="left">O365HomePremRetail</td>
+<td align="left">S</td>
+</tr>
+<tr>
+<td align="left">O365 ProPlus</td>
+<td align="left">O365ProPlusRetail</td>
+<td align="left">V</td>
+</tr>
+<tr>
+<td align="left">O365 Enterprise E3, E4, E5</td>
+<td align="left">O365ProPlusRetail</td>
+<td align="left">S V</td>
+</tr>
+<tr>
+<td align="left">O365 Business</td>
+<td align="left">O365BusinessRetail</td>
+<td align="left">S</td>
+</tr>
+<tr>
+<td align="left">O365 Business Premium</td>
+<td align="left">O365BusinessRetail</td>
+<td align="left">S</td>
+</tr>
+<tr>
+<td align="left">O365 Small Business Premium</td>
+<td align="left">O365SmallBusinessRetail</td>
+<td align="left">S</td>
+</tr>
+<tr>
+<td align="left">O365 ProPlus 2019 VL</td>
+<td align="left">ProPlus2019Volume</td>
+<td align="left">V</td>
+</tr>
+<tr>
+<td align="left">O365 Standard 2019 VL</td>
+<td align="left">Standard2019Volume</td>
+<td align="left">V</td>
+</tr>
+<tr>
+<td align="left">Office 2019 Home &amp; Student</td>
+<td align="left">HomeStudent2019Retail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">Office 2019 Home &amp; Business</td>
+<td align="left">HomeBusiness2019Retail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">Office 2019 Personal</td>
+<td align="left">Personal2019Retail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">Office 2019 Professional</td>
+<td align="left">Professional2019Retail</td>
+<td align="left">P</td>
+</tr>
+<tr>
+<td align="left">Office 2019 ProPlus</td>
+<td align="left">ProPlus2019Retail</td>
+<td align="left">P</td>
+</tr>
+</tbody></table>
 <h2 id="安装-Office"><a href="#安装-Office" class="headerlink" title="安装 Office"></a>安装 Office</h2><p>在完成 xml 配置文件的编辑后，在 <code>setup.exe</code> 同级目录窗口中的空白区域，<strong>按住</strong>键盘 Shift 键的<strong>同时</strong>点击鼠标<strong>右键</strong>。在弹出的菜单中点击“在此处打开 Powershell 窗口”并在输入下面的命令后回车</p>
 <pre><code>.\setup.exe /configure trinity.xml</code></pre><p>最后耐心等待进度条跑完即可<br><img src="/img/5.png" srcset="/img/loading.gif" alt=""></p>
-<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>关于<a href="https://blog.epnode.com/60801.html#">激活</a>请自行购买相关产品。</p>
 
             </div>
             <hr>
