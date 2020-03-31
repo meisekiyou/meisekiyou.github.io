@@ -7,17 +7,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="google-site-verification" content="4IUf6k1ueI5nt3QxyBFAnl9rgaJMTR5W504TBtIgp1U" />
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>CentOS 7.7 1908 编译安装 Nginx 1.16.1 ~ 我们即一体</title>
+  <title>CentOS 7.7 1908 编译安装 Nginx 1.16.1 - 我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -33,7 +33,7 @@
 <link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 <!-- 自定义样式保持在最底部 -->
@@ -145,13 +145,6 @@
                   </span>
                 
 
-                
-                  <!-- 不蒜子统计文章PV -->
-                  
-                  <span id="busuanzi_container_page_pv" class="post-meta" style="display: none">
-                    <i class="far fa-eye" aria-hidden="true"></i>
-                    <span id="busuanzi_value_page_pv"></span> 次
-                  </span>
                 
               </p>
             
@@ -299,9 +292,33 @@ $ systemctl enable nginx</code></pre>
               
                 <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
               
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2189.html">
+                        <i class="fa fa-chevron-left"></i>
+                        <span class="hidden-mobile">使用 acme.sh 从 Let's Encrypt 获取免费 SSL 证书</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/49161.html">
+                        <span class="hidden-mobile">敬語の勉強メモ</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="fa fa-chevron-right"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
             </div>
 
-            
+              
           </div>
         </div>
       </div>
@@ -367,23 +384,6 @@ $ systemctl enable nginx</code></pre>
     <br>
 
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
 
     
@@ -412,9 +412,10 @@ $ systemctl enable nginx</code></pre>
   <script>
     $(document).ready(function () {
       var navHeight = $('#navbar').height();
-      var post = $('#post');
       var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+      var tocLimMax = 2 * boardTop + boardCtn.height();
 
       $(window).scroll(function () {
         var tocLimMin = $('#toc-start').offset().top - navHeight;
@@ -445,11 +446,12 @@ $ systemctl enable nginx</code></pre>
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
         $('#toc > p').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
+      var offset = boardCtn.css('margin-right')
       $('#toc-ctn').css({
         'right': offset
       })
@@ -460,28 +462,17 @@ $ systemctl enable nginx</code></pre>
 
 
 
-  <script  src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
-  <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
 
 
 <!-- Plugins -->
-
-
-  
-
-  
-
-  
-
-  
-
-  <!-- cnzz Analytics -->
-  
 
 
 
@@ -519,7 +510,7 @@ $ systemctl enable nginx</code></pre>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
       
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
@@ -544,7 +535,7 @@ $ systemctl enable nginx</code></pre>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {

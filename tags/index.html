@@ -7,17 +7,17 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="google-site-verification" content="4IUf6k1ueI5nt3QxyBFAnl9rgaJMTR5W504TBtIgp1U" />
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>标签 ~ 我们即一体</title>
+  <title>标签 - 我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -33,7 +33,7 @@
 <link  rel="stylesheet" href="/css/main.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
 
 
 <!-- 自定义样式保持在最底部 -->
@@ -143,6 +143,7 @@
 <div class="text-center tagcloud">
   <a href="/tags/Anime-images/" style="font-size: 15px; color: #bbe">Anime images</a> <a href="/tags/CentOS/" style="font-size: 25px; color: #6090c9">CentOS</a> <a href="/tags/Git/" style="font-size: 15px; color: #bbe">Git</a> <a href="/tags/Hexo/" style="font-size: 15px; color: #bbe">Hexo</a> <a href="/tags/Let-s-Encrypt/" style="font-size: 15px; color: #bbe">Let's Encrypt</a> <a href="/tags/Microsoft-activation/" style="font-size: 15px; color: #bbe">Microsoft activation</a> <a href="/tags/NVM/" style="font-size: 15px; color: #bbe">NVM</a> <a href="/tags/Nginx/" style="font-size: 20px; color: #8ea5dc">Nginx</a> <a href="/tags/SSL/" style="font-size: 15px; color: #bbe">SSL</a> <a href="/tags/Terminal/" style="font-size: 15px; color: #bbe">Terminal</a> <a href="/tags/Windows/" style="font-size: 15px; color: #bbe">Windows</a> <a href="/tags/acme-sh/" style="font-size: 15px; color: #bbe">acme.sh</a> <a href="/tags/macOS/" style="font-size: 30px; color: #337ab7">macOS</a> <a href="/tags/mkfs/" style="font-size: 15px; color: #bbe">mkfs</a> <a href="/tags/waifu2x/" style="font-size: 15px; color: #bbe">waifu2x</a> <a href="/tags/%E6%95%AC%E8%AA%9E/" style="font-size: 15px; color: #bbe">敬語</a> <a href="/tags/%E6%97%A5%E6%9C%AC%E8%AA%9E/" style="font-size: 15px; color: #bbe">日本語</a>
 </div>
+
               </div>
             </div>
           </div>
@@ -193,23 +194,6 @@
     <br>
 
     
-  <div>
-    
-      <!-- 不蒜子统计PV -->
-      
-      <span id="busuanzi_container_site_pv" style="display: none">
-      总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    </span>
-    
-    
-      <!-- 不蒜子统计UV -->
-      
-      <span id="busuanzi_container_site_uv" style="display: none">
-      总访客数 <span id="busuanzi_value_site_uv"></span> 人
-    </span>
-    
-  </div>
-
 
 
     
@@ -235,28 +219,17 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/smoothscroll/1.4.10/SmoothScroll.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
 
 
-  <script defer src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
 
 
 
 
 <!-- Plugins -->
-
-
-  
-
-  
-
-  
-
-  
-
-  <!-- cnzz Analytics -->
-  
 
 
 
@@ -294,7 +267,7 @@
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
       
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
@@ -319,7 +292,7 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {
