@@ -112,7 +112,7 @@
 </nav>
 
     <div class="view intro-2" id="background" parallax=true
-         style="background: url('/../img/wallpaper.webp') no-repeat center center;
+         style="background: url('/../img/wallpaper.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -184,7 +184,7 @@ $ systemctl enable crond</code></pre>
 <pre><code class="bash">$ curl https://get.acme.sh | sh</code></pre>
 <p>安装成功后执行 <code>source ~/.bashrc</code> 更新环境变量</p>
 <h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><p>这里我采用 dns mode 申请证书，以解决 standalone mode 需要 socat 占用 80 端口的困扰。我的域名解析托管在 <a href="https://www.cloudflare.com/" target="_blank" rel="noopener">Cloudflare</a> ，其他解析商请参考 acme.sh 项目的 <a href="https://github.com/acmesh-official/acme.sh/wiki/%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">READEME.md</a>。使用 dns mode 首先需要获取 Cloudflare 账户的 API Key，具体方法如下图</p>
-<p><img src="/img/3.webp" srcset="/img/loading.gif" alt=""></p>
+<p><img src="/img/3.png" srcset="/img/loading.gif" alt=""></p>
 <p>接着进入终端</p>
 <pre><code class="bash">$ export CF_Key=&quot;API_KEY&quot;
 $ export CF_Email=&quot;EMAIL&quot;
