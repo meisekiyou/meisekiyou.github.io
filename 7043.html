@@ -310,6 +310,32 @@ $ firewall-cmd --zone=public --add-port=80/tcp --permanent</code></pre>
                 <div class="comments" id="comments">
                   
                   
+  <div id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script defer src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.11.1/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var oldLoad = window.onload;
+    window.onload = function () {
+      var gitalk = new Gitalk({
+        clientID: 'b8b81aafb0121fe89256',
+        clientSecret: '0014f5c3096fb4b387636be30a93f79639a24ea7',
+        repo: 'blog_comments',
+        owner: 'meisekiyou',
+        admin: 'meisekiyou',
+        id: md5(location.pathname),
+        language: 'zh-CN',
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: 'true',
+        distractionFreeMode: 'false'
+      });
+
+      gitalk.render('gitalk-container')
+      oldLoad && oldLoad();
+    }
+  </script>
+
 
                 </div>
               
