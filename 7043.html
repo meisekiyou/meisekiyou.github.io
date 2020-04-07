@@ -181,7 +181,7 @@
               <p>在折腾的过后往往都需要进行总结记录，相比〇〇笔记来说我更喜欢使用博客进行记录。</p>
 <h2 id="基本设想"><a href="#基本设想" class="headerlink" title="基本设想"></a>基本设想</h2><ul>
 <li>本地 Hexo 生成静态文件，使用 Git 同步至服务器仓库</li>
-<li>服务器仓库收到 push 后 Git Hooks 触发 shell 脚本复制至 Nginx 网站根目录</li>
+<li>服务器仓库收到 push 后 Git Hooks 触发 checkout 命令复制至 Nginx 网站根目录</li>
 <li>通过 Nginx 转发，实现博客访问</li>
 </ul>
 <a id="more"></a>
