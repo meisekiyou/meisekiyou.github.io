@@ -18,7 +18,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>归档 - 我们即一体</title>
+  <title>我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -44,7 +44,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -133,6 +133,10 @@
           </div>
 
           
+            <div class="scroll-down-bar">
+              <i class="fas fa-angle-down scroll-down-arrow"></i>
+            </div>
+          
         </div>
       </div>
     </div>
@@ -142,69 +146,70 @@
     
       <div class="container nopadding-md">
         <div class="py-5 z-depth-3" id="board"
-          >
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 11 篇文章</p>
-  <hr>
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2020</p>
     
-    <a href="/33666.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">了解 WebP 格式</span>
-      <span style="float: right;">03-31</span>
-    </a>
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a href="/14602.html">
+        <p class="h4 index-header">macOS Mojave 安装 waifu2x-converter-glsl</p>
+      </a>
+
+      <a href="/14602.html">
+        
+        
+          
+          
+        
+        <div class="index-excerpt" style="max-height: none;">
+          <div class="index-text mb-1">waifu2x 是使用 NVIDIA CUDA 技术的深度卷积神经网路的图片缩放降噪程序。在新版 macOS 不支持 NVIDIA 显卡情况下我们可以使用 waifu2x-converter-glsl 分支利用 OpenGL 替代实现。...</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-21&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E7%9E%8E%E6%8A%98%E8%85%BE/">瞎折腾</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/macOS/">macOS</a>&nbsp;
+          
+            <a href="/tags/waifu2x/">waifu2x</a>&nbsp;
+          
+            <a href="/tags/Anime-images/">Anime images</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="index posts navigation">
+    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
   
-    
-    <a href="/21799.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">使用 Office Deployment Tool 定制安装 Office</span>
-      <span style="float: right;">03-30</span>
-    </a>
-  
-    
-    <a href="/2189.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">使用 acme.sh 从 Let&#39;s Encrypt 获取免费 SSL 证书</span>
-      <span style="float: right;">03-21</span>
-    </a>
-  
-    
-    <a href="/37619.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">CentOS 7.7 1908 编译安装 Nginx 1.16.1</span>
-      <span style="float: right;">03-17</span>
-    </a>
-  
-    
-    <a href="/49161.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">敬語の勉強メモ</span>
-      <span style="float: right;">03-13</span>
-    </a>
-  
-    
-    <a href="/60801.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">CentOS 安装 vlmcsd 搭建 KMS 服务器</span>
-      <span style="float: right;">03-09</span>
-    </a>
-  
-    
-    <a href="/11711.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">macOS 下格式化磁盘为 ext2/3/4 文件系统</span>
-      <span style="float: right;">03-09</span>
-    </a>
-  
-    
-    <a href="/7043.html" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">使用 Nginx 和 Hexo 搭建博客</span>
-      <span style="float: right;">03-06</span>
-    </a>
-  
-</div>
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -327,7 +332,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "问是一时之耻，不问是一世之耻&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
