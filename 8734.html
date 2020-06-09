@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    679 字
+                    696 字
                   </span>
                 
 
@@ -150,7 +150,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      2 分钟
+                      3 分钟
                   </span>
                 
 
@@ -234,7 +234,8 @@
 <p><img src="/img/6.jpeg" srcset="/img/loading.gif" alt=""></p>
 <p>关闭 <code>Secure Boot</code> 安全启动选项并使用 UEFI 模式引导制作好的启动盘。</p>
 <h2 id="修改偏量值"><a href="#修改偏量值" class="headerlink" title="修改偏量值"></a>修改偏量值</h2><p>首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
-<pre><code>setup_var 0x725 0x01</code></pre><p>当然在此之前我们也可以通过 <code>setup_var</code> 命令我们可以查看相应 Variable 的默认值。接着我们设置 Offset Prefix，Offset Prefix 的参数决定了我们是<strong>加压</strong>还是<strong>降压</strong>。</p>
+<p>当然在此之前我们也可以通过 <code>setup_var</code> 命令我们可以查看相应 Variable 的默认值。例如查看 OverClocking Feature 的默认值我们可以用 <code>setup_var 0x725</code></p>
+<pre><code>setup_var 0x725 0x01</code></pre><p>接着我们设置 Offset Prefix，Offset Prefix 的参数决定了我们是<strong>加压</strong>还是<strong>降压</strong>。</p>
 <pre><code>setup_var 0x72d 0x1</code></pre><p>最后来修改补偿电压，这里我们保守一点 -100mv</p>
 <pre><code>setup_var 0x72b 0x64</code></pre><p>设置好后就可以重启电脑进系统查看效果了！</p>
 
