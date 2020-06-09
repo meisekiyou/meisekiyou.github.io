@@ -18,7 +18,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="keywords" content="">
-  <title>CentOS 安装 vlmcsd 搭建 KMS 服务器 - 我们即一体</title>
+  <title>Dell XPS 15 9570 处理器降压 - 我们即一体</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -133,7 +133,7 @@
               
                 <p class="mt-3 post-meta">
                   <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期一, 三月 9日 2020, 9:36 晚上
+                  星期二, 六月 9日 2020, 9:59 晚上
                 </p>
               
 
@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    427 字
+                    728 字
                   </span>
                 
 
@@ -150,7 +150,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      1 分钟
+                      3 分钟
                   </span>
                 
 
@@ -178,69 +178,71 @@
           <div class="post-content mx-auto" id="post">
             
             <div class="markdown-body">
-              <p>KMS(Key Management Service) 是微软公司的一种产品激活机制。</p>
-<ul>
-<li>本文章仅供学习讨论，相关的软件请在 24 小时内删除</li>
-<li>KMS 激活有效期仅 <strong>180</strong> 天（可续期</li>
-<li>请使用正版产品</li>
+              <p>Dell XPS 15 令人诟病的散热器想必让不少用户感到抓狂，不少用户都发现自己的处理器被锁在 0.8 GHz。不少动手能力强的用户在机器到手后相比在散热方面下了不少功夫吧，网络上的各种升级 BIOS 、删除温控、更换散热器/硅脂等教程层出不穷。更深一步，我们可以通过 XTU 来降低处理器电压来减少发热，在 Linux 平台也可以通过修改 kernel 参数来调整电压。但相应的设置只能在单一系统生效，有没有一劳永逸的办法呢？本文将通过 <code>setup_var</code> 命令修改 BIOS 隐藏选项来达成降压目的。</p>
+<h2 id="环境约定"><a href="#环境约定" class="headerlink" title="环境约定"></a>环境约定</h2><ul>
+<li>机器型号 Dell XPS 15 9570</li>
+<li>BIOS 版本 1.15.0</li>
 </ul>
-<a id="more"></a>
-
-<h2 id="安装-vlmcsd"><a href="#安装-vlmcsd" class="headerlink" title="安装 vlmcsd"></a>安装 <a href="https://github.com/Wind4/vlmcsd/" target="_blank" rel="noopener">vlmcsd</a></h2><p>首先在<a href="https://github.com/Wind4/vlmcsd/releases" target="_blank" rel="noopener">这里</a>下载最新的版本</p>
-<pre><code class="bash">wget https://github.com/Wind4/vlmcsd/releases/download/svn1112/binaries.tar.gz
-tar xf binaries.tar.gz -C /usr/local/binaries/Linux/intel/static/
-# 创建相应架构二进制执行文件的软连接
-ln -s /usr/local/binaries/Linux/intel/static/vlmcsd-x64-musl-static /usr/sbin/vlmcsd
-# 运行并查看进程
-vlmcsd
-netstat -apn | grep vlmcsd
-# 开放 vlmcsd 端口
-firewall-cmd --zone=public --add-port=1688/tcp --permanent</code></pre>
-<h2 id="激活-Windows"><a href="#激活-Windows" class="headerlink" title="激活 Windows"></a>激活 Windows</h2><p>首先你要确保系统为 <strong>批量激活版本</strong>，即 VL 版本。其镜像一般内置 GVLK key，非 VL 版本的 Windows 也可以手动输入 GVLK key 来使用 KMS。Windows 的 GVLK key 可以在<a href="https://docs.microsoft.com/zh-cn/windows-server/get-started/kmsclientkeys" target="_blank" rel="noopener">这里</a>获取。Office 2019 和 2016 的 GVLK key 在<a href="https://docs.microsoft.com/zh-cn/DeployOffice/vlactivation/gvlks?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>，2013 和 2010 则分别在<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/dn385360(v=office.15)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>和<a href="https://docs.microsoft.com/zh-cn/previous-versions/office/office-2010/ee624355(v=office.14)?redirectedfrom=MSDN" target="_blank" rel="noopener">这里</a>。</p>
-<p>以 <strong>管理员</strong> 模式运行 cmd</p>
-<pre><code class="bash"># 设置 GVLK key
-slmgr /ipk &#39;GVLK key&#39;
-# 设置 KMS 服务器地址
-slmgr /skms &#39;KMS服务器IP地址&#39;
-# 激活
-slmgr /ato</code></pre>
-<p>成功后会弹窗提示。</p>
-<h2 id="激活-Office"><a href="#激活-Office" class="headerlink" title="激活 Office"></a>激活 Office</h2><p>安装批量激活版 Office 可以参考<a href="https://blog.epnode.com/21799.html">这篇</a>文章。安装后我们不要立刻打开，老规矩以 <strong>管理员</strong> 模式运行 cmd</p>
-<p>找到你的 Office 安装目录，如：<code>C:\Program Files\Microsoft Office\Office16</code></p>
-<pre><code class="bash"># 设置 GVLK key，如自带 GVLK key 可跳过
-cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /inpkey:&#39;GVLK key&#39;
-# 设置 KMS 服务器地址
-cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /sethst:&#39;KMS服务器IP地址&#39;
-# 激活
-cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /act</code></pre>
-<p>看到 successful 字样表示激活成功。</p>
+<h2 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h2><p>在修改 BIOS 之前我们要获取其相应选项的 <code>偏量值</code> 。我们可以通过解包 BIOS 文件来获取，具体参考 <a href="#">这篇</a> 教程。</p>
+<p>不过在 Github 上也有大神放出了相应的 <code>偏量值</code>，链接在 <a href="https://github.com/jaromeyer/XPS9570-Firmware-IFR" target="_blank" rel="noopener">这里</a>。</p>
+<p>通过查阅 <code>XPS_9570_1.15.0_IFR.txt</code> 文件我们可以找到相应设置的 <code>偏量值</code></p>
+<pre><code>...
+0x4DF1D         Setting: OverClocking Feature, Variable: 0x725 {05 91 74 13 75 13 99 04 01 00 25 07 10 10 00 01 00}
+0x4DF2E             Option: Disabled, Value: 0x0 {09 07 04 00 30 00 00}
+0x4DF35             Option: Enabled, Value: 0x1 {09 07 03 00 00 00 01}
+0x4DF3C         End of Options {29 02}
+...
+0x4E0EA         Numeric: Core Voltage Offset (8607398753692811266-8607398753692811266) , Variable: 0x72B {07 94 8A 13 8B 13 A7 04 01 00 2B 07 10 11 00 00 E8 03 01 00}
+0x4E0FE             Default: 16 Bit, Value: 0x0 {5B 07 00 00 01 00 00}
+0x4E105         End {29 02}
+0x4E107         Setting: Offset Prefix, Variable: 0x72D {05 91 A0 13 A4 13 A8 04 01 00 2D 07 10 10 00 01 00}
+0x4E118             Option: +, Value: 0x0 {09 07 46 03 30 00 00}
+0x4E11F             Option: -, Value: 0x1 {09 07 47 03 00 00 01}
+0x4E126         End of Options {29 02}
+0x4E128         Subtitle:  {02 87 02 00 00 00 00}
+0x4E12F         End {29 02}
+...</code></pre><p>由此可知</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">地址(Variable)</th>
+<th align="right">写入值(Value)</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">OverClocking Feature</td>
+<td align="center">0x725</td>
+<td align="right">0x00(Disabled)/0x01(Enabled)</td>
+<td align="center">超频选项</td>
+</tr>
+<tr>
+<td align="center">Core Voltage Offset</td>
+<td align="center">0x72B</td>
+<td align="right">0x00(0mv)/0x64(100mv)/0x78(120mv)/0x96(150mv)</br>数值为16进制</td>
+<td align="center">补偿电压</td>
+</tr>
+<tr>
+<td align="center">Offset Prefix</td>
+<td align="center">0x72D</td>
+<td align="right">0x00(+)/0x01(-)</td>
+<td align="center">补偿首字母</td>
+</tr>
+</tbody></table>
+<p>然后利用 <a href="https://github.com/datasone/grub-mod-setup_var" target="_blank" rel="noopener">grub-mod-setup_var</a>] 制作一个启动盘来修改，将 U盘 格式化为 FAT32 文件系统并将 <code>modGRUBShell.efi</code> 重命名为 <code>BOOTx64.efi</code> 存放为 U盘 <code>/EFI/BOOT/BOOTx64.efi</code>。最终效果如下图：</p>
+<p><img src="/img/6.jpeg" srcset="/img/loading.gif" alt=""></p>
+<p>关闭安装 <code>Secure Boot</code> 安全启动选项并适用 UEFI 模式引导制作好的启动盘。</p>
+<h2 id="修改偏量值"><a href="#修改偏量值" class="headerlink" title="修改偏量值"></a>修改偏量值</h2><p>首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
+<pre><code>setup_var 0x725 0x01</code></pre><p>当然在此之前我们也可以通过 <code>setup_var</code> 命令我们可以查看相应 Variable 的默认值。接着我们设置 Offset Prefix，Offset Prefix 的参数决定了我们是<strong>加压</strong>还是<strong>降压</strong>。</p>
+<pre><code>setup_var 0x72d 0x1</code></pre><p>最后来修改补偿电压，这里我们保守一点 -100mv</p>
+<pre><code>setup_var 0x72b 0x64</code></pre><p>设置好后就可以重启电脑进系统查看效果了！</p>
 
             </div>
             <hr>
             <div>
               <p>
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%9E%8E%E6%8A%98%E8%85%BE/">瞎折腾</a>
-                      &nbsp;
-                    
-                  </span>&nbsp;&nbsp;
-                
-                
-                  <span>
-                <i class="iconfont icon-tag"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Microsoft/">Microsoft</a>
-                    
-                      <a class="hover-with-bg" href="/tags/CentOS/">CentOS</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Activate/">Activate</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Windows/">Windows</a>
-                    
-                  </span>
                 
               </p>
               
@@ -251,18 +253,12 @@ cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /act</co
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/49161.html">
-                        <i class="fa fa-chevron-left"></i>
-                        <span class="hidden-mobile">敬語の勉強メモ</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/11711.html">
-                        <span class="hidden-mobile">macOS 下格式化磁盘为 ext2/3/4 文件系统</span>
+                      <a href="/21092.html">
+                        <span class="hidden-mobile">获取 Google Chrome 离线安装包</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="fa fa-chevron-right"></i>
                       </a>
@@ -478,7 +474,7 @@ cscript &quot;C:\Program Files\Microsoft Office\Office16\ospp.vbs&quot; /act</co
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "CentOS 安装 vlmcsd 搭建 KMS 服务器&nbsp;",
+        "Dell XPS 15 9570 处理器降压&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
