@@ -230,7 +230,7 @@
 <td align="left">补偿首字母</td>
 </tr>
 </tbody></table>
-<p>然后利用 <a href="https://github.com/datasone/grub-mod-setup_var" target="_blank" rel="noopener">grub-mod-setup_var</a> 制作一个启动盘来修改，将 U盘 格式化为 FAT32 文件系统并将 <code>modGRUBShell.efi</code> 重命名为 <code>BOOTx64.efi</code> 存放为 U盘 <code>/EFI/BOOT/BOOTx64.efi</code></p>
+<p>然后利用 <a href="https://github.com/datasone/grub-mod-setup_var" target="_blank" rel="noopener">grub-mod-setup_var</a> 制作一个启动盘来修改，将 U盘 格式化为 FAT32 文件系统并将 <code>modGRUBShell.efi</code> 重命名为 <code>BOOTx64.efi</code> 存放至 U盘 <code>/EFI/BOOT/BOOTx64.efi</code></p>
 <p><img src="/img/6.jpeg" srcset="/img/loading.gif" alt=""></p>
 <p>关闭 <code>Secure Boot</code> 安全启动选项并使用 UEFI 模式引导制作好的启动盘。</p>
 <h2 id="修改偏量值"><a href="#修改偏量值" class="headerlink" title="修改偏量值"></a>修改偏量值</h2><p>首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
