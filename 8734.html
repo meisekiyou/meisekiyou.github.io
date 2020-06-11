@@ -183,9 +183,9 @@
 <li>机器型号 Dell XPS 15 9570</li>
 <li>BIOS 版本 1.15.0</li>
 </ul>
-<h2 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h2><p>首先我们要获取 BIOS 隐藏选项的 <code>偏量值</code> 。我们可以通过解包 BIOS 文件来获取，具体参考 <a href="#">这里</a> 。</p>
-<p>不过在 Github 上也有大神放出了相应的 <code>偏量值</code>，链接在 <a href="https://github.com/jaromeyer/XPS9570-Firmware-IFR" target="_blank" rel="noopener">这里</a>。</p>
-<p>通过查阅 <code>XPS_9570_1.15.0_IFR.txt</code> 文件我们可以找到相应设置的 <code>偏量值</code></p>
+<h2 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h2><p>首先我们要获取 BIOS 隐藏选项的 <code>偏移量</code> 。我们可以通过解包 BIOS 文件来获取，具体参考 <a href="#">这里</a> 。</p>
+<p>不过在 Github 上也有大神放出了相应的 <code>偏移量</code>，链接在 <a href="https://github.com/jaromeyer/XPS9570-Firmware-IFR" target="_blank" rel="noopener">这里</a>。</p>
+<p>通过查阅 <code>XPS_9570_1.15.0_IFR.txt</code> 文件我们可以找到相应设置的 <code>偏移量</code></p>
 <pre><code>...
 0x4DF1D         Setting: OverClocking Feature, Variable: 0x725 {05 91 74 13 75 13 99 04 01 00 25 07 10 10 00 01 00}
 0x4DF2E             Option: Disabled, Value: 0x0 {09 07 04 00 30 00 00}
@@ -233,7 +233,7 @@
 <p>然后利用 <a href="https://github.com/datasone/grub-mod-setup_var" target="_blank" rel="noopener">grub-mod-setup_var</a> 制作一个启动盘来修改，将 U盘 格式化为 FAT32 文件系统并将 <code>modGRUBShell.efi</code> 重命名为 <code>BOOTx64.efi</code> 存放至 U盘 <code>/EFI/BOOT/BOOTx64.efi</code></p>
 <p><img src="/img/6.jpeg" srcset="/img/loading.gif" alt=""></p>
 <p>关闭 <code>Secure Boot</code> 安全启动选项并使用 UEFI 模式引导制作好的启动盘。</p>
-<h2 id="修改偏量值"><a href="#修改偏量值" class="headerlink" title="修改偏量值"></a>修改偏量值</h2><p>首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
+<h2 id="修改偏移量"><a href="#修改偏移量" class="headerlink" title="修改偏移量"></a>修改偏移量</h2><p>首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
 <p>在修改前我们也可以通过 <code>setup_var</code> 命令我们可以查看相应 Variable 的默认值。例如查看 OverClocking Feature 的默认值我们可以用 <code>setup_var 0x725</code></p>
 <pre><code>setup_var 0x725 0x01</code></pre><p>接着我们设置 Offset Prefix，Offset Prefix 的参数决定了我们是<strong>加压</strong>还是<strong>降压</strong>。</p>
 <pre><code>setup_var 0x72d 0x01</code></pre><p>最后来修改补偿电压，这里我们保守一点 -100mv</p>
