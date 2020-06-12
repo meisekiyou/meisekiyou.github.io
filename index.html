@@ -173,11 +173,11 @@
 机器型号 Dell XPS 15 9570
 BIOS 版本 1.15.0
 
-事前准备首先我们要获取 BIOS 隐藏选项的 偏移量 。我们可以通过解包 BIOS 文件来获取，具体参考 这里 。
+获取偏移量首先我们要获取 BIOS 隐藏选项的 偏移量 。我们可以通过解包 BIOS 文件来获取，具体参考 这里 。
 不过在 Github 上也有大神放出了相应的 偏移量，链接在 这里。
 通过查阅 XPS_9570_1.15.0_IFR.txt 文件我们可以找到相应设置的 偏移量
 ...
-0x4DF1D         Setting: OverClocking Feature, Variable: 0x725 {05 91 74 13 75 13 99 04 01 00 25 07 10 </div>
+0x4DF1D         Setting: OverClocking Feature, Variable: 0x725 {05 91 74 13 75 13 99 04 01 00 25 07 10</div>
         </div>
       </a>
 
