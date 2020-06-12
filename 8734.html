@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    538 字
+                    539 字
                   </span>
                 
 
@@ -221,13 +221,13 @@
 <td>Core Voltage Offset</td>
 <td align="left">0x72B</td>
 <td align="left">0x00(0mv)/0x64(100mv)/</br>0x78(120mv)/0x96(150mv)</td>
-<td align="left">补偿电压</td>
+<td align="left">偏移电压</td>
 </tr>
 <tr>
 <td>Offset Prefix</td>
 <td align="left">0x72D</td>
 <td align="left">0x00(+)/0x01(-)</td>
-<td align="left">补偿首字母</td>
+<td align="left">偏移量前缀</td>
 </tr>
 </tbody></table>
 <h2 id="制作-Grub-Shell-启动盘"><a href="#制作-Grub-Shell-启动盘" class="headerlink" title="制作 Grub Shell 启动盘"></a>制作 Grub Shell 启动盘</h2><p>将 U盘 格式化为 FAT32 文件系统并前往 <a href="https://github.com/datasone/grub-mod-setup_var" target="_blank" rel="noopener">grub-mod-setup_var</a> 下载 <code>modGRUBShell.efi</code> 重命名为 <code>BOOTx64.efi</code> 存放至 U盘 <code>/EFI/BOOT/BOOTx64.efi</code></p>
@@ -235,8 +235,9 @@
 └── EFI
     └── BOOT
             └── BOOTx64.efi</code></pre><h2 id="修改偏移量"><a href="#修改偏移量" class="headerlink" title="修改偏移量"></a>修改偏移量</h2><p>关闭 <code>Secure Boot</code> 安全启动选项并使用 UEFI 模式引导制作好的启动盘。</p>
-<p>在修改前我们可以通过 <code>setup_var</code> 命令（语法：<code>setup_var variable</code>）我们可以查看相应 Variable 当前的偏移量。</p>
-<p>首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
+<p>使用<code>setup_var</code>查看相应 Variable 偏移量（可省略）</p>
+<pre><code>setup_var 0x725</code></pre><p>这样返回的便是 OverClocking Feature 默认的 Value。</p>
+<p>进入正题，首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
 <pre><code>setup_var 0x725 0x01</code></pre><p>接着我们修改 Offset Prefix，Offset Prefix 的参数决定了我们是<strong>加压</strong>还是<strong>降压</strong>。</p>
 <pre><code>setup_var 0x72d 0x01</code></pre><p>最后来设置 Core Voltage Offset，这里我们保守一点 -100mv（写入值为 16 进制）</p>
 <pre><code>setup_var 0x72b 0x64</code></pre><p>设置好后就可以重启电脑进系统查看效果了！</p>
