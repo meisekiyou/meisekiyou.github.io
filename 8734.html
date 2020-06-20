@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    538 字
+                    536 字
                   </span>
                 
 
@@ -236,10 +236,10 @@
     └── BOOT
             └── BOOTx64.efi</code></pre><h2 id="修改偏移量"><a href="#修改偏移量" class="headerlink" title="修改偏移量"></a>修改偏移量</h2><p>关闭 <code>Secure Boot</code> 安全启动选项并使用 UEFI 模式引导制作好的启动盘。</p>
 <p>使用<code>setup_var</code>查看相应 Variable 偏移量（可省略）</p>
-<pre><code>setup_var 0x725</code></pre><p>这样返回的便是 OverClocking Feature 默认的 Value。</p>
+<pre><code>setup_var 0x725</code></pre><p>这样返回的便是 OverClocking Feature 当前的 Value。</p>
 <p>进入正题，首先我们解锁 OverClocking Feature（0x725 是寄存器地址；0x01 是写入值）</p>
 <pre><code>setup_var 0x725 0x01</code></pre><p>接着我们修改 Offset Prefix，Offset Prefix 的参数决定了我们是<strong>加压</strong>还是<strong>降压</strong></p>
-<pre><code>setup_var 0x72d 0x01</code></pre><p>最后来设置 Core Voltage Offset，这里我们保守一点 -100mv（写入值为 16 进制）</p>
+<pre><code>setup_var 0x72d 0x01</code></pre><p>最后来设置 Core Voltage Offset，这里我们保守一点 -100mv（Value 为 16 进制）</p>
 <pre><code>setup_var 0x72b 0x64</code></pre><p>设置好后就可以重启电脑进系统查看效果了！</p>
 
             </div>
