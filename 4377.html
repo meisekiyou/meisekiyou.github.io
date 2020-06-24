@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    703 字
+                    715 字
                   </span>
                 
 
@@ -200,7 +200,12 @@ epmandeMacBook-Pro:~ epman$ git clone https://github.com/platomav/BIOSUtilities.
 epmandeMacBook-Pro:~ epman$ cd BIOSUtilities/Dell\ PFS\ BIOS\ Extractor/
 epmandeMacBook-Pro:Dell PFS BIOS Extractor epman$ pyinstaller --noupx --onefile Dell_PFS_Extract.py</code></pre>
 <p>编译成功后可在 <code>dist</code> 文件夹中找到生成的可执行文件</p>
-<h3 id="解压-BIOS"><a href="#解压-BIOS" class="headerlink" title="解压 BIOS"></a>解压 BIOS</h3><p>Usage：Dell_PFS_Extract [-h] [-a] [images [images …]]<br>optional arguments:<br>    -h, –help   show this help message and exit<br>    -a, –advanced extract in advanced user mode</p>
+<h3 id="解压-BIOS"><a href="#解压-BIOS" class="headerlink" title="解压 BIOS"></a>解压 BIOS</h3><p>用法：</p>
+<pre><code class="bash">usage：Dell_PFS_Extract [-h] [-a] [images [images ...]]
+optional arguments:
+    -h, --help   show this help message and exit
+    -a, --advanced extract in advanced user mode</code></pre>
+<p>在 <code>dist</code> 目录中执行命令</p>
 <pre><code class="bash">epmandeMacBook-Pro:dist epman$ ./Dell_PFS_Extract ~/Downloads/XPS_9570_1.16.2.exe 
 
 Dell PFS BIOS Extractor v4.5
