@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    482 字
+                    703 字
                   </span>
                 
 
@@ -150,7 +150,7 @@
                   
                   <span class="post-meta">
                       <i class="far fa-clock"></i>
-                      2 分钟
+                      3 分钟
                   </span>
                 
 
@@ -183,6 +183,7 @@
 <h2 id="演示环境"><a href="#演示环境" class="headerlink" title="演示环境"></a>演示环境</h2><ul>
 <li>机器型号 Dell XPS 15 9570</li>
 <li>BIOS 版本 1.16.2</li>
+<li>操作环境 macOS Mojave 10.14.6</li>
 </ul>
 <h2 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h2><ul>
 <li><a href="https://www.dell.com/support/home/zh-cn/drivers/driversdetails?driverid=p6pcn&oscode=wt64a&productcode=xps-15-9570-laptop" target="_blank" rel="noopener">BIOS</a></li>
@@ -191,6 +192,34 @@
 <li><a href="https://github.com/LongSoft/Universal-IFR-Extractor" target="_blank" rel="noopener">Universal IFR Extractor</a> - 转换为可阅读的文本文件</li>
 </ul>
 <h2 id="获取-BIOS"><a href="#获取-BIOS" class="headerlink" title="获取 BIOS"></a>获取 BIOS</h2><p>关于 BIOS 的获取问题，我们可以使用 Universal BIOS Backup ToolKit，AMI Flasher utility-AFUWIN 等工具提取。这里我采用从 Dell 官网下载 <code>XPS_9570_1.16.2.exe</code> 并使用 Dell PFS BIOS Extractor 进行提取</p>
+<h3 id="使用-PyInstaller-编译-Dell-PFS-BIOS-Extractor"><a href="#使用-PyInstaller-编译-Dell-PFS-BIOS-Extractor" class="headerlink" title="使用 PyInstaller 编译 Dell PFS BIOS Extractor"></a>使用 PyInstaller 编译 Dell PFS BIOS Extractor</h3><p>确保 Python 版本在 3.7.0 及以上</p>
+<pre><code class="bash">epmandeMacBook-Pro:~ epman$ python -V
+Python 3.7.7
+epmandeMacBook-Pro:~ epman$ pip3 install pyinstaller
+epmandeMacBook-Pro:~ epman$ git clone https://github.com/platomav/BIOSUtilities.git
+epmandeMacBook-Pro:~ epman$ cd BIOSUtilities/Dell\ PFS\ BIOS\ Extractor/
+epmandeMacBook-Pro:Dell PFS BIOS Extractor epman$ pyinstaller --noupx --onefile Dell_PFS_Extract.py</code></pre>
+<p>编译成功后可在 <code>dist</code> 文件夹中找到生成的可执行文件</p>
+<h3 id="解压-BIOS"><a href="#解压-BIOS" class="headerlink" title="解压 BIOS"></a>解压 BIOS</h3><p>Usage：Dell_PFS_Extract [-h] [-a] [images [images …]]<br>optional arguments:<br>    -h, –help   show this help message and exit<br>    -a, –advanced extract in advanced user mode</p>
+<pre><code class="bash">epmandeMacBook-Pro:dist epman$ ./Dell_PFS_Extract ~/Downloads/XPS_9570_1.16.2.exe 
+
+Dell PFS BIOS Extractor v4.5
+
+File: XPS_9570_1.16.2.exe
+
+    Extracted Dell PFS BIOS image!
+
+Done!</code></pre>
+<h3 id="Windows-环境下"><a href="#Windows-环境下" class="headerlink" title="Windows 环境下"></a>Windows 环境下</h3><p>于 Windows 环境下可前往项目 [Releases] 页面下载已编译完成的可执行文件，并于 <code>CMD</code> 中执行如下命令</p>
+<pre><code class="bash">C:\Users\Ep_Man\Desktop\Dell_PFS_Extract_v4.5&gt;Dell_PFS_Extract.exe XPS_9570_1.16.2.exe
+
+Dell PFS BIOS Extractor v4.5
+
+File: XPS_9570_1.16.2.exe
+
+    Extracted Dell PFS BIOS image!
+
+Done!</code></pre>
 <h2 id="提取模块"><a href="#提取模块" class="headerlink" title="提取模块"></a>提取模块</h2><p>进入 UEFITool 使用快捷键 <code>Command + O（Windows 下为 Ctrl + O）</code>或在菜单栏选择 <strong>File&gt;Open image file…</strong> 打开提取的 bin 文件</p>
 <p><img src="/img/extract-ifr-efi/File%3EOpen_image_file.png" srcset="/img/loading.gif" alt=""></p>
 <p>接着使用 <code>Command + F（Windows 下为 Ctrl + F）</code>或在菜单栏选择 <strong>File&gt;Search…</strong> 查找 <code>cfg lock</code> 字样</p>
