@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    501 字
+                    477 字
                   </span>
                 
 
@@ -192,13 +192,13 @@
 </ul>
 <h2 id="获取-BIOS"><a href="#获取-BIOS" class="headerlink" title="获取 BIOS"></a>获取 BIOS</h2><p>关于 BIOS 的获取问题，我们可以使用 Universal BIOS Backup ToolKit，AMI Flasher utility-AFUWIN 等工具提取，但这里我采用从官网下载 <code>XPS_9570_1.16.2.exe</code> 并使用 Dell PFS BIOS Extractor 进行提取</p>
 <h2 id="提取模块"><a href="#提取模块" class="headerlink" title="提取模块"></a>提取模块</h2><p>进入 UEFITool 使用快捷键 <code>Command + O（Windows 下为 Ctrl + O）</code>或在菜单栏选择 <code>File&gt;Open image file...</code> 打开提取的 bin 文件</p>
-<p>![](/img/extract-ifr-efi/File&gt;Open\ image\ file.png)</p>
+<p><img src="/img/extract-ifr-efi/File%3EOpen_image_file.png" srcset="/img/loading.gif" alt=""></p>
 <p>接着使用 <code>Command + F（Windows 下为 Ctrl + F）</code>或在菜单栏选择 <code>File&gt;Search...</code> 进行查找</p>
 <p><img src="/img/extract-ifr-efi/File%3ESearch.png" srcset="/img/loading.gif" alt=""></p>
 <p>双击返回的 <code>Unicode text &quot;cfg lock&quot; found in PE32 image section at offset 7D344h</code> 即可定位到该模块，最后右键该模块选择 <code>Extract body...</code> 完成提取</p>
-<p>![](/img/extract-ifr-efi/Extract\ body.png)</p>
+<p><img src="/img/extract-ifr-efi/Extract_body.png" srcset="/img/loading.gif" alt=""></p>
 <p>注意保存类型为 <strong>All Files(*)</strong></p>
-<p>![](/img/extract-ifr-efi/Save\ type.png)</p>
+<p><img src="/img/extract-ifr-efi/Save_type.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="保存-IFR-为文本"><a href="#保存-IFR-为文本" class="headerlink" title="保存 IFR 为文本"></a>保存 IFR 为文本</h2><p>在 macOS 下打开 <code>Terminal</code> 使用 ifrextract 工具来保存为 txt 文本文件（Usage: ifrextract input_file output_file）</p>
 <pre><code class="bash">epmandeMacBook-Pro:~ epman$ cd XPS_9570_1.16.2.exe_extracted/
 epmandeMacBook-Pro:XPS_9570_1.16.2.exe_extracted epman$ ./ifrextract pe32.efi 9570_1.16.2_IFR.txt
