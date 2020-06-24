@@ -142,7 +142,7 @@
                   
                   <span class="post-meta">
                     <i class="far fa-chart-bar"></i>
-                    715 字
+                    706 字
                   </span>
                 
 
@@ -231,8 +231,6 @@ Done!</code></pre>
 <p><img src="/img/extract-ifr-efi/File%3ESearch.png" srcset="/img/loading.gif" alt=""></p>
 <p>双击返回的 <code>Unicode text &quot;cfg lock&quot; found in PE32 image section at offset 7D344h</code> 即可定位到该模块，最后右键该模块选择 <strong>Extract body…</strong> 完成提取</p>
 <p><img src="/img/extract-ifr-efi/Extract_body.png" srcset="/img/loading.gif" alt=""></p>
-<p>注意保存类型为 <strong>All Files(*)</strong></p>
-<p><img src="/img/extract-ifr-efi/Save_type.png" srcset="/img/loading.gif" alt=""></p>
 <h2 id="保存-IFR-为文本"><a href="#保存-IFR-为文本" class="headerlink" title="保存 IFR 为文本"></a>保存 IFR 为文本</h2><p>在 macOS 下打开 <code>Terminal</code> 使用 ifrextract 工具来保存为 txt 文本文件<code>（Usage: ifrextract input_file output_file）</code></p>
 <pre><code class="bash">epmandeMacBook-Pro:~ epman$ cd XPS_9570_1.16.2.exe_extracted/
 epmandeMacBook-Pro:XPS_9570_1.16.2.exe_extracted epman$ ./ifrextract pe32.efi 9570_1.16.2_IFR.txt
