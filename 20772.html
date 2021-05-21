@@ -288,7 +288,7 @@ interface GigabitEthernet0/0/1
 return
 [R1-GigabitEthernet0/0/1]q
 [R1]ip route-static 0.0.0.0 0.0.0.0 100.1.1.100</code></pre><p>配置 GE 0/0/1 接口IP地址为<code>100.1.1.1/24</code></p>
-<p>因为 R1 处在边境地带，索性配置所有数据包下一跳地址刀 FW1 的 GE 0/0/1 接口<code>100.1.1.100</code></p>
+<p>因为 R1 处在边境地带，索性配置所有数据包下一跳地址为 FW1 的 GE 0/0/1 接口<code>100.1.1.100</code></p>
 <h3 id="PC端的设置"><a href="#PC端的设置" class="headerlink" title="PC端的设置"></a>PC端的设置</h3><pre><code>IPv4 address......................: 192.168.1.1
 Subnet mask.......................: 255.255.255.0
 Gateway...........................: 192.168.1.100</code></pre><p>配置IP地址为<code>192.168.1.1/24</code>网段内可用IP即可，网关配置为 FW1 GE 0/0/0 口的 IP 即可。</p>
